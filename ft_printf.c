@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lprior <lprior@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:30:54 by ckrommen          #+#    #+#             */
-/*   Updated: 2017/12/19 17:26:50 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/02 11:53:31 by lprior           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ char *ft_remalloc(char *str)
 	return (NULL);
 }
 
+char	*parse_flags2(char *flag, va_list ap)
+{
+	if (*flag == 'u')
+		return ("UNSIGNED_INT");
+	else if (*flag == 'U')
+		return ("UNSIGNED_INT");
+	else if (*flag == 'x')
+		return (ft_itoa(va_arg(ap, int)));
+	else if (*flag == 'X')
+		return (ft_itoa(va_arg(ap, int)));
+	else if (*flag == 'c')
+		return (va_arg(ap, char *));
+	else if (*flag == 'C')
+		return ("BROKEN");
+	else
+		return ("END");
+}
+
+
 char	*parse_flags(char *flag, va_list ap)
 {
 	if (*flag == 's')
@@ -45,23 +64,11 @@ char	*parse_flags(char *flag, va_list ap)
 		return (ft_itoa(va_arg(ap, int)));
 	else if (*flag == 'O')
 		return ("LONG_INT");
-	else if (*flag == 'u')
-		return ("UNSIGNED_INT");
-	else if (*flag == 'U')
-		return ("UNSIGNED_INT");
-	else if (*flag == 'x')
-		return (ft_itoa(va_arg(ap, int)));
-	else if (*flag == 'X')
-		return (ft_itoa(va_arg(ap, int)));
-	else if (*flag == 'c')
-		return (va_arg(ap, char *));
-	else if (*flag == 'C')
-		return ("BROKEN");
 	else
-		return ("END");
+		return (parse_flags2(flag, ap));
 }
 
-char	*parse_format(char *format, char *res, va_list ap)
+	char	*parse_format(char *format, char *res, va_list ap)
 {
 	int i;
 
@@ -109,27 +116,3 @@ int main(void)
   ft_printf("%p%S", 2, 1);
   return 0;
 }
-
-
-
-/* print all non-negative args one at a time;
-   all args are assumed to be of int type 
-void printargs(const char *format, ...)
-{
-	va_list ap;
-	int i;
-	char *str;
-
-	va_start(ap, format); 
-	i = 4;
-	str = (char *)format;
-	while (i >= 0)
-	{
-		ft_putstr(str);
-		str = va_arg(ap, char *);
-		i--;
-	}
-	va_end(ap);
-	putchar('\n');
-}
-*/
