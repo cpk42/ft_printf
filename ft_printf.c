@@ -6,7 +6,7 @@
 /*   By: lprior <lprior@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:30:54 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/03 19:31:27 by lprior           ###   ########.fr       */
+/*   Updated: 2018/01/03 19:33:13 by lprior           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,14 @@ unsigned long	4 bytes	0 to 4,294,967,295
 float	4 byte	1.2E-38 to 3.4E+38	6 decimal places
 double	8 byte	2.3E-308 to 1.7E+308	15 decimal places
 long double	10 byte	3.4E-4932 to 1.1E+4932	19 decimal places
+\a	audible alert
+\b	backspace
+\f	form feed
+\n	newline, or linefeed
+\r	carriage return
+\t	tab
+\v	vertical tab
+\\	backslash
 */
 
 /*
