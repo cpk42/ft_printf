@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/03 17:59:34 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/19 14:22:04 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@
 # define ZERO tools.zero
 # define SPACE tools.space
 # define HASH tools.hash
-# define PREC tools.prec
+# define PREC tools.precision
 # define STAR tools.star
-# define DISPLAY tools.display
 # define TYPE tools.type
 # define WIDTH tools.width
-# define PRECISION tools.precision
-# define ARGUMENT tools.argument
+# define ARG tools.argument
+# define RET tools.ret
 # define LEN tools.len
 
 /* Spacing Flags */
@@ -54,7 +53,6 @@ typedef	struct s_tools
   int	space;
   int	hash;
   int	prec;
-  int	display;
   int	star;
   char	type;
   int	width;
