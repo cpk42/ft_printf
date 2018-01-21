@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
+/*   Updated: 2018/01/20 16:26:56 by ckrommen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 /*
@@ -30,39 +42,27 @@
 /*
 ** use the tools struct to deal with extra flags
 */
-
-void	use_tools(char *str, t_tools tools, char *arg)
+void	width(char *str, t_tools tools, char *arg)
 {
 	int i;
 	int j;
 
 	j = ft_strlen(str);
+	i = WIDTH ? 0 : 1;
+//	str[j++] = SPACE ? ' ' : 0;
+	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
+		str[j++] = ZERO == true ? '0' : ' ';
+	if (WIDTH == -1 && i)
+		WIDTH = ft_strlen(arg);
 	i = 0;
-	while (WIDTH-- >= ft_strlen(arg))
-	{
-		str[j] = ' ';
-		j++;
-	}
-	if (j > ft_strlen(str))
-		WIDTH = ft_strlen(arg);// FIX THIS <-----------------------------------------------------------------------------------
 	while (arg[i] && WIDTH-- >= 0)
 	{
 		str[j] = arg[i];
 		i++;
 		j++;
 	}
-}
-
-/*
-** Converts args that contain characters
-*/
-void	convert_char(t_tools tools, char *str, va_list ap)
-{
-	char	*temp;
-	
-	if (TYPE == 's' || TYPE == 'c')
-		temp = va_arg(ap, char *);
-	use_tools(str, tools, temp);
+	while (MINUS == true && WIDTH-- > 0)
+		str[j++] = ZERO == true ? '0' : ' ';
 }
 
 /*
@@ -72,26 +72,12 @@ void	find_flag(t_tools tools, char *str, va_list ap)
 {
     if (TYPE == 's' || TYPE == 'c')
 		convert_char(tools, str, ap);
-}
-
-void	reset_tools(t_tools tools)
-{
-	PLUS = false;
-	MINUS = false;
-	ZERO = false;
-	SPACE = false;
-	HASH = false;
-	PREC = false;
-	TYPE = 0;
-	WIDTH = 0;
-	PREC = 0;
-	ARG = 0;
-	RET = 0;
-	LEN = 0;
+	else if (TYPE == 'd' || TYPE == 'i')
+		convert_int(tools, str, ap);
 }
 
 /*
-** returns a pointer to the given index of a string
+** Returns a pointer to the given index of a string
 */
 
 char	*ft_substr(int i, char *str)
@@ -100,6 +86,7 @@ char	*ft_substr(int i, char *str)
 		str++;
 	return (str);
 }
+
 /*
 ** Handles every flag preceding the conversion character and assigns tools to it
 */
@@ -108,26 +95,31 @@ int		parse_flag(char *format, char *str, t_tools tools, va_list ap, int *i)
 {
 	while (!CONV(format[*i]) && format[*i])
 	{
-		if (format[*i] == '+')
-			PLUS = true;
-		else if (format[*i] == '-')
-			MINUS = true;
+		PLUS = format[*i] == '+' ? true : false;
+		MINUS = format[*i] == '-' ? true : false;
+		ZERO = format[*i] == '0' ? true : false;
+		if (format[*i] == '.')
+		{
+			if (ft_isdigit(format[++*i]))
+			{
+				PREC = ft_atoi(ft_substr(*i, format));
+				while (ft_isdigit(format[*i + 1]) && format[*i + 1])
+					(*i)++;
+			}
+		}
 		else if (ft_isdigit(format[*i]))
 		{
 			WIDTH = ft_atoi(ft_substr(*i, format));
 			while (ft_isdigit(format[*i + 1]) && format[*i + 1])
 				(*i)++;
 		}
-		else if (format[*i] == ' ' && !PLUS)
-			SPACE = true;
+		SPACE = (format[*i] == ' ' && !PLUS) ? true : false;
 		(*i)++;
 	}
-//	ft_putchar(format[*i]);
 	TYPE = format[*i];
 	find_flag(tools, str, ap);
 	return (*i);
 }
-
 /*
 ** parses orignal format string until a % char is found
 */
@@ -149,7 +141,7 @@ int		parse_format(char *format, char *str, t_tools tools, va_list ap)
 		else
 		{
 			i = parse_flag(format, str, tools, ap, &i);
-			reset_tools(tools);
+			tools = reset_tools();
 			j = ft_strlen(str);
 		}
 		i++;
@@ -165,7 +157,7 @@ int		ft_printf(const char *format, ...)
 	
 	va_start(ap, format);
 	ft_bzero(str, 1024);
-	reset_tools(tools);
+	tools = reset_tools();
 	parse_format((char *)format, str, tools, ap);
 	ft_putstr(str);
 	va_end(ap);
@@ -176,7 +168,11 @@ int		main()
 {
 //	ft_printf("asd");
 //	printf("%d", 1);
-    ft_printf("%4s   %s", "string", "new");
+	ft_printf("%9.7d\n", 1234);
+	printf("%-9.7d\n", 1234);
+//    ft_printf("%s%s\n", "string", "new");
+//	printf("%s%s\n", "string", "new");
+//	printf("%d", 'c');
     return 1;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/19 14:22:04 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/20 16:13:00 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,37 @@
     c == 'c' || c == 'C')
 
 /* Modifier Flags */
-# define MOD(c) (c == 'h' || c == 'l' || c == 'j' || c == 'z' || c == 'hh' || c == 'll')
+# define MOD(c) (c == 'h' || c == 'l' || c == 'j' || c == 'z')
 
 typedef	struct s_tools
 {
-  int	plus;
-  int	minus;
-  int	zero;
-  int	space;
-  int	hash;
-  int	prec;
-  int	star;
-  char	type;
-  int	width;
-  int	precision;
-  int	argument;
-  int	ret;
-  int	len;
+	int		plus;
+	int		minus;
+	int		zero;
+	int		space;
+	int		hash;
+	int		prec;
+	int		star;
+	char	type;
+	int		width;
+	int		precision;
+	int		argument;
+	int		ret;
+	int		len;
 }		t_tools;
 
+int		ft_printf(const char *format, ...);
+char	*ft_substr(int i, char *str);
+char	*parse_flags(char *flag, va_list ap);
+char	*parse_flags2(char *flag, va_list ap);
+char	*ft_remalloc(char *str, int size);
+int		parse_flag(char *format, char *str, t_tools tools, va_list ap, int *i);
+int		parse_format(char *format, char *str, t_tools tools, va_list ap);
+void	convert_char(t_tools tools, char *str, va_list ap);
+void	convert_int(t_tools tools, char *str, va_list ap);
+void	find_flag(t_tools tools, char *str, va_list ap);
+t_tools	reset_tools();
+void	use_tools(char *str, t_tools tools, char *arg);
+void	width(char *str, t_tools tools, char *arg);
 
 #endif
