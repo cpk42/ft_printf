@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/20 16:26:56 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:16:46 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,86 +40,57 @@
 */
 
 /*
-** use the tools struct to deal with extra flags
-*/
-void	width(char *str, t_tools tools, char *arg)
-{
-	int i;
-	int j;
-
-	j = ft_strlen(str);
-	i = WIDTH ? 0 : 1;
-//	str[j++] = SPACE ? ' ' : 0;
-	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
-		str[j++] = ZERO == true ? '0' : ' ';
-	if (WIDTH == -1 && i)
-		WIDTH = ft_strlen(arg);
-	i = 0;
-	while (arg[i] && WIDTH-- >= 0)
-	{
-		str[j] = arg[i];
-		i++;
-		j++;
-	}
-	while (MINUS == true && WIDTH-- > 0)
-		str[j++] = ZERO == true ? '0' : ' ';
-}
-
-/*
 ** Determines which conversion to be done with the given % arg
+** sSpdDioOuUxXcC
+**  %d %i     Decimal signed integer.
+**  %o      Octal integer.
+**  %x %X     Hex integer.
+**  %u      Unsigned integer.
+** %c      Character.
+** %s      String.
+** %c       char
+** %p        pointer.
+** No argument expected.
+** % %%. No argument expected.
 */
+
 void	find_flag(t_tools tools, char *str, va_list ap)
 {
-    if (TYPE == 's' || TYPE == 'c')
+    if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
 		convert_char(tools, str, ap);
 	else if (TYPE == 'd' || TYPE == 'i')
 		convert_int(tools, str, ap);
-}
-
-/*
-** Returns a pointer to the given index of a string
-*/
-
-char	*ft_substr(int i, char *str)
-{
-	while (i-- > 0)
-		str++;
-	return (str);
+	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' || TYPE == 'o' || TYPE == 'O')
+		convert_ptr(tools, str, ap);
 }
 
 /*
 ** Handles every flag preceding the conversion character and assigns tools to it
 */
 
-int		parse_flag(char *format, char *str, t_tools tools, va_list ap, int *i)
+int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap)
 {
-	while (!CONV(format[*i]) && format[*i])
+	while (!CONVERSIONS(format[*i]) && format[(*i)++])
 	{
-		PLUS = format[*i] == '+' ? true : false;
-		MINUS = format[*i] == '-' ? true : false;
-		ZERO = format[*i] == '0' ? true : false;
-		if (format[*i] == '.')
-		{
-			if (ft_isdigit(format[++*i]))
-			{
-				PREC = ft_atoi(ft_substr(*i, format));
-				while (ft_isdigit(format[*i + 1]) && format[*i + 1])
-					(*i)++;
-			}
-		}
+		if (FLAGS(format[*i]))
+			tools = assign_flags(tools, format, i);
 		else if (ft_isdigit(format[*i]))
-		{
 			WIDTH = ft_atoi(ft_substr(*i, format));
-			while (ft_isdigit(format[*i + 1]) && format[*i + 1])
-				(*i)++;
-		}
-		SPACE = (format[*i] == ' ' && !PLUS) ? true : false;
-		(*i)++;
+		else if (format[*i] == '.')
+			PREC = (format[*i + 1] && ft_isdigit(format[*i + 1])) ?
+				ft_atoi(ft_substr(*i + 1, format)) : 0;
+		else if (FORMAT(format[*i]))
+			tools = assign_format(tools, format, i);
+		else if (format[*i] == '%')
+			break ;
+		while ((ft_isdigit(format[*i + 1]) && format[*i + 1]) && (WIDTH || PREC))
+			(*i)++;
 	}
 	TYPE = format[*i];
 	find_flag(tools, str, ap);
 	return (*i);
 }
+
 /*
 ** parses orignal format string until a % char is found
 */
@@ -133,14 +104,14 @@ int		parse_format(char *format, char *str, t_tools tools, va_list ap)
 	j = 0;
 	while (format[i])
 	{
-		if (format[i] != '%' && format[i])
+		if (format[i] != '%')
 		{
 			str[j] = format[i];
 			j++;
 		}
 		else
 		{
-			i = parse_flag(format, str, tools, ap, &i);
+			i = parse_flag(format, tools, str, &i, ap);
 			tools = reset_tools();
 			j = ft_strlen(str);
 		}
@@ -164,20 +135,8 @@ int		ft_printf(const char *format, ...)
 	return (1);
 }
 
-int		main()
-{
-//	ft_printf("asd");
-//	printf("%d", 1);
-	ft_printf("%9.7d\n", 1234);
-	printf("%-9.7d\n", 1234);
-//    ft_printf("%s%s\n", "string", "new");
-//	printf("%s%s\n", "string", "new");
-//	printf("%d", 'c');
-    return 1;
-}
-
-
 /*
+  sSpdDioOuUxXcC
   char 1 byte-128 to 127 or 0 to 255
   unsigned char 1 byte 0 to 255
   signed char 1 byte-128 to 127
@@ -200,7 +159,7 @@ int		main()
   \vvertical tab
   \						\backslash
   
-  
+
   %d %i     Decimal signed integer.
   %o      Octal integer.
   %x %X     Hex integer.
