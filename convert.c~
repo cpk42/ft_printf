@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:44:29 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:09:14 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,14 @@ void	convert_int(t_tools tools, char *str, va_list ap)
 {
 	char temp[1024];
 	char *mem;
-	long long i;
+	__uint64_t i;
 
 	ft_bzero(temp, 1024);
 	i = use_format(tools, ap);
-	if (i == LL_MIN)
-		NEG = true;
-	if ((TYPE == 'i' || TYPE == 'd') && i != LL_MAX)
+	if ((TYPE == 'i' || TYPE == 'd') && !FORM)
 	{
-		NEG = i < 0 ? true : false;
-		i *= i < 0 ? -1 : 1;
+		NEG = (int)i < 0 ? true : false;
+		i *= (int)i < 0 ? -1 : 1;
 	}
 	if (i)
 	{
@@ -69,29 +67,10 @@ void	convert_ptr(t_tools tools, char *str, va_list ap)
 
 	ft_bzero(temp, 1024);
 	nbr = va_arg(ap, unsigned long long int);
+//	ft_putnbr(nbr);
 	if (TYPE == 'o' || TYPE == 'O')
 		ft_itoo(nbr, tools, temp);
 	else
 		ft_itoh(nbr, tools, temp);
-	use_tools(str, tools, temp);
-}
-
-/*
-** Convert ull
-*/
-
-void	convert_ull(t_tools tools, char *str, va_list ap)
-{
-	unsigned long long int i;
-	char	*mem;
-	char	temp[1024];
-
-	i = ull_use_format(tools, ap);
-	if (i)
-	{
-		mem = ft_ulltoa(i);
-		ft_strcpy(temp, mem);
-		ft_strdel(&mem);
-	}
 	use_tools(str, tools, temp);
 }

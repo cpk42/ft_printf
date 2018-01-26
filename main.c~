@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:57:33 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:52:35 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:56:36 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	main()
 	ft_printf("%-%\n");
 	printf("%-%\n\n");
 
+//sSpdDioOuUxXcC
+
 	ft_printf("CONVERSIONS\n");
 
 	ft_printf("PRINTING MEMORY/HEXADECIMAL\n");
@@ -127,23 +129,11 @@ int	main()
 	printf("%hhd\n\n", (char)12345);
 	ft_printf("%ld\n", (long)12345);
 	printf("%ld\n\n", (long)12345);
-	ft_printf("\n%lld\n", (long long)LL_MAX);
+	ft_printf("TEST\n%lld\n", (long long)LL_MAX);
 	printf("%lld\n\n", (long long)LL_MAX);
-	ft_printf("\n%lld\n", (long long)LL_MIN);
-	printf("%lld\n\n", (long long)LL_MIN);
 	ft_printf("%jd\n", (intmax_t)12345);
 	printf("%jd\n\n", (intmax_t)12345);
-	ft_printf("%zd\n", (size_t)3221225472);
-	printf("%zd\n\n", (size_t)3221225472);
-	ft_printf("%lld\n", (long long)-12345);
-	printf("%lld\n\n", (long long)-12345);
-	ft_printf("%d\n", INT_MAX);
-	printf("%d\n\n", INT_MAX);
-	ft_printf("%u\n", (unsigned int)4294967295);
-	printf("%u\n\n", (unsigned int)4294967295);
-	ft_printf("%U\n", (unsigned int)4294967295);
-	printf("%U\n\n", (unsigned int)4294967295);
-	ft_printf("%zu\n", 4294967295);
-	printf("%zu\n\n", 4294967295);
+	ft_printf("%zd\n", (size_t)12345);
+	printf("%zd\n\n", (size_t)12345);
 	return 1;
 }

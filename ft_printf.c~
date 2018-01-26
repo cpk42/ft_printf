@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:34:09 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:16:46 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	find_flag(t_tools tools, char *str, va_list ap)
 		convert_int(tools, str, ap);
 	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' || TYPE == 'o' || TYPE == 'O')
 		convert_ptr(tools, str, ap);
-	else if (TYPE == 'u' || TYPE == 'U')
-		convert_ull(tools, str, ap);
 }
 
 /*

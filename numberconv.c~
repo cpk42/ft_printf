@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:04:33 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:17:57 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,4 @@ char	*ft_itoo(unsigned long long int nbr, t_tools tools, char *str)
 	if (HASH)
 		hash(tools, str);
 	return (ft_strrev(str));
-}
-
-/*
-** ULL to ascii
-*/
-
-char	*ft_ulltoa(__uint64_t nbr)
-{
-	int length;
-	__uint64_t sign;
-	char *str;
-
-	sign = nbr;
-	length = 1;
-	while (sign /= 10)
-		length++;
-	str = ft_strnew(length);
-	if (!str)
-		return (NULL);
-	while (--length >= 0)
-	{
-		str[length] = (nbr >= 10) ? (nbr % 10) + 48 : nbr + 48;
-		nbr /= 10;
-	}
-	str[ft_strlen(str)] = '\0';
-	return (str);
 }
