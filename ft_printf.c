@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:34:09 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:05:59 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,28 @@
 ** % %%. No argument expected.
 */
 
-void	find_flag(t_tools tools, char *str, va_list ap)
+int		find_flag(t_tools tools, va_list ap)
 {
+	int ret;
+
     if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
-		convert_char(tools, str, ap);
+		ret = convert_char(tools, ap);
 	else if (TYPE == 'd' || TYPE == 'i')
-		convert_int(tools, str, ap);
+		ret = convert_int(tools, ap);
 	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' || TYPE == 'o' || TYPE == 'O')
-		convert_ptr(tools, str, ap);
+		ret = convert_ptr(tools, ap);
 	else if (TYPE == 'u' || TYPE == 'U')
-		convert_ull(tools, str, ap);
+		ret = convert_ull(tools, ap);
+	else
+		ret = 0;
+	return (ret);
 }
 
 /*
 ** Handles every flag preceding the conversion character and assigns tools to it
 */
 
-int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap)
+int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 {
 	while (!CONVERSIONS(format[*i]) && format[(*i)++])
 	{
@@ -89,52 +94,51 @@ int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap)
 			(*i)++;
 	}
 	TYPE = format[*i];
-	find_flag(tools, str, ap);
-	return (*i);
+	return(find_flag(tools, ap));
 }
 
 /*
 ** parses orignal format string until a % char is found
 */
 
-int		parse_format(char *format, char *str, t_tools tools, va_list ap)
+int		parse_format(char *format, t_tools tools, va_list ap)
 {
 	int i;
-	int j;
-	
+	int ret;
+
+	ret = 0;
 	i = 0;
-	j = 0;
 	while (format[i])
 	{
 		if (format[i] != '%')
 		{
-			str[j] = format[i];
-			j++;
+			ft_putchar(format[i]);
+			ret++;
 		}
 		else
 		{
-			i = parse_flag(format, tools, str, &i, ap);
+			ret += parse_flag(format, tools, &i, ap);
 			tools = reset_tools();
-			j = ft_strlen(str);
 		}
 		i++;
 	}
-	return (i);
+	return (ret);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	t_tools tools;
-	char str[1024];
 	va_list ap;
-	
+	int		ret;
+
 	va_start(ap, format);
-	ft_bzero(str, 1024);
 	tools = reset_tools();
-	parse_format((char *)format, str, tools, ap);
-	ft_putstr(str);
+	ret = parse_format((char *)format, tools, ap);
 	va_end(ap);
-	return (1);
+	tools = reset_tools();
+//	while (1)
+//		;
+	return (ret);
 }
 
 /*

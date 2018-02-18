@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:46:15 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/17 20:16:26 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,38 @@ t_tools	reset_tools()
 /*
 ** uses collected flags in tools struct to create final output string
 */
-void	use_tools(char *str, t_tools tools, char *arg)
+int		use_tools(t_tools tools, char *arg)
 {
-	if (WIDTH < PREC)
-		WIDTH = PREC;
-	if (ZERO && !PREC) //used for edgecase ("%+05d", -7) && ("%+05d", 7)
-		PREC = WIDTH-1;
-	if (TYPE != '%')
-		arg = precision(tools, arg);
-	width(str, tools, arg);
-	if (PREC)
+	char str[1024];
+	int ret;
+
+	ret = 0;
+	if (TYPE == '%')
+	{
+		ft_putchar('%');
+		ret++;
+	}
+	else
+	{
+		ft_bzero(str, 1024);
+		if (!WIDTH && !PREC)
+			WIDTH = ft_strlen(arg);
+		if (PREC > (int)ft_strlen(arg) && TYPE == 's')
+			PREC = ft_strlen(arg);
+		if (!PREC)
+			PREC = ft_strlen(arg);
+//		if (PREC > WIDTH)
+//			PREC = WIDTH;
+		//printf("\n\n\nMINUS: %d WIDTH: %d PREC: %d PLUS: %d SPACE: %d NEG: %d\n", MINUS, WIDTH, PREC, PLUS, SPACE, NEG);
+//		printf("\n\nREAL WIDTH: %d\n\n", WIDTH);
+		arg = precision(tools, arg, 0);
+//		printf("ARG %s\n", arg);
+		width(str, tools, arg);
+		ft_putstr(str);
+		ret += ft_strlen(str);
 		ft_strdel(&arg);
+	}
+	return (ret);
 }
 
 /*
@@ -133,14 +154,26 @@ t_tools	assign_flags(t_tools tools, char *format, int *i)
 	if (format[*i] == ' ')
 		SPACE = true;
 	else if (format[*i] == '+')
+	{
 		PLUS = true;
+		MINUS = false;
+	}
 	else if (format[*i] == '-')
 		MINUS = true;
 	else if (format[*i] == '0')
 		ZERO = true;
 	else if (format[*i] == '#')
 		HASH = true;
-//	if (SPACE && PLUS)
-//		SPACE = false;
 	return (tools);
 }
+
+/*
+		if (!PREC && WIDTH && WIDTH > (int)ft_strlen(arg))
+			PREC = WIDTH;
+		if (!WIDTH && !PREC)
+			WIDTH = ft_strlen(arg);
+		else if (!PREC)
+			PREC = ft_strlen(arg);
+		if ((((SPACE && WIDTH) || (ZERO && WIDTH)) && (MINUS || PLUS)) && WIDTH > (int)ft_strlen(arg))
+			PREC = WIDTH - 1;
+ */

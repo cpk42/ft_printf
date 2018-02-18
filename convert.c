@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:44:29 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/17 19:11:29 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 ** Converts args that contain characters
 */
 
-void	convert_char(t_tools tools, char *str, va_list ap)
+int	convert_char(t_tools tools, va_list ap)
 {
 	char	temp[1024];
+	int		ret;
 
 	ft_bzero(temp, 1024);
 	if (TYPE == 's')
@@ -27,21 +28,24 @@ void	convert_char(t_tools tools, char *str, va_list ap)
 		temp[0] = va_arg(ap, int);
 	else if (TYPE == '%')
 		temp[0] = '%';
-	use_tools(str, tools, temp);
+	ret = use_tools(tools, temp);
+	return (ret);
 }
 
 /*
 ** Converts args containg ints
 */
 
-void	convert_int(t_tools tools, char *str, va_list ap)
+int	convert_int(t_tools tools, va_list ap)
 {
-	char temp[1024];
-	char *mem;
-	long long i;
+	char		temp[1024];
+	char		*mem;
+	int			ret;
+	long long	i;
 
 	ft_bzero(temp, 1024);
 	i = use_format(tools, ap);
+	ZERO = true;
 	if (i == LL_MIN)
 		NEG = true;
 	if ((TYPE == 'i' || TYPE == 'd') && i != LL_MAX)
@@ -55,36 +59,41 @@ void	convert_int(t_tools tools, char *str, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
-	use_tools(str, tools, temp);
+	ret = use_tools(tools, temp);
+	return (ret);
 }
 
 /*
 ** convert hex and ptr
 */
 
-void	convert_ptr(t_tools tools, char *str, va_list ap)
+int	convert_ptr(t_tools tools,  va_list ap)
 {
 	unsigned long long int nbr;
 	char	temp[1024];
+	int		ret;
 
 	ft_bzero(temp, 1024);
 	nbr = va_arg(ap, unsigned long long int);
+	ZERO = true;
 	if (TYPE == 'o' || TYPE == 'O')
 		ft_itoo(nbr, tools, temp);
 	else
 		ft_itoh(nbr, tools, temp);
-	use_tools(str, tools, temp);
+	ret = use_tools(tools, temp);
+	return (ret);
 }
 
 /*
 ** Convert ull
 */
 
-void	convert_ull(t_tools tools, char *str, va_list ap)
+int	convert_ull(t_tools tools, va_list ap)
 {
 	unsigned long long int i;
 	char	*mem;
 	char	temp[1024];
+	int		ret;
 
 	i = ull_use_format(tools, ap);
 	if (i)
@@ -93,5 +102,21 @@ void	convert_ull(t_tools tools, char *str, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
-	use_tools(str, tools, temp);
+	ret = use_tools(tools, temp);
+	return (ret);
+}
+
+/*
+** Convert wide char
+*/
+
+int	convert_wchar(t_tools tools, va_list ap)
+{
+	wchar_t	*mem;
+	char	str[1024];
+
+	ft_bzero(str, 1024);
+	mem = (wchar_t *)va_arg(ap, wchar_t *);
+	ft_putchar(TYPE);
+	return (1);
 }

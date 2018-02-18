@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:49:31 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/17 19:54:31 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef	struct s_tools
 /*
 ** General use libft funcs
 */
+
 int		ft_printf(const char *format, ...);
 char	*ft_substr(int i, char *str);
 char	*ft_strrev(char *str);
@@ -74,32 +75,39 @@ char	*ft_strrev(char *str);
 /*
 ** Parsing and solving funcs
 */
-int		parse_format(char *format, char *str, t_tools tools, va_list ap);
-int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap);
-void	find_flag(t_tools tools, char *str, va_list ap);
+
+int		parse_format(char *format, t_tools tools, va_list ap);
+int		parse_flag(char *format, t_tools tools, int *i, va_list ap);
+int		find_flag(t_tools tools, va_list ap);
 
 /*
 ** Conversion funcs
 */
-void	convert_char(t_tools tools, char *str, va_list ap);
-void	convert_int(t_tools tools, char *str, va_list ap);
-void	convert_ptr(t_tools tools, char *str, va_list ap);
-void	convert_ull(t_tools tools, char *str, va_list ap);
+
+int		convert_char(t_tools tools, va_list ap);
+int		convert_int(t_tools tools, va_list ap);
+int		convert_ptr(t_tools tools, va_list ap);
+int		convert_ull(t_tools tools, va_list ap);
+int		convert_wchar(t_tools tools, va_list ap);
+
 /*
 ** Flag management funcs
 */
-void	width(char *str, t_tools tools, char *arg);
-char	*precision(t_tools tools, char *arg);
-void	hash(t_tools tools, char *str);
+
+void		width(char *str, t_tools tools, char *arg);
+char		*precision(t_tools tools, char *arg, int j);
+void		hash(t_tools tools, char *str);
+
 /*
 ** Extra tool funcs
 */
-t_tools	reset_tools();
-void	use_tools(char *str, t_tools tools, char *arg);
-t_tools	assign_format(t_tools tools, char *format, int *i);
+
+t_tools		reset_tools();
+int			use_tools(t_tools tools, char *arg);
+t_tools		assign_format(t_tools tools, char *format, int *i);
 long long	use_format(t_tools tools, va_list ap);
 __uint64_t	ull_use_format(t_tools tools, va_list ap);
-t_tools	assign_flags(t_tools tools, char *format, int *i);
+t_tools		assign_flags(t_tools tools, char *format, int *i);
 
 /*
 ** Number system conversions
@@ -108,4 +116,5 @@ t_tools	assign_flags(t_tools tools, char *format, int *i);
 char	*ft_ulltoa(__uint64_t nbr);
 char	*ft_itoh(unsigned long long int nbr, t_tools tools, char *str);
 char	*ft_itoo(unsigned long long int nbr, t_tools tools, char *str);
+
 #endif
