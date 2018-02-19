@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 17:10:59 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 20:53:19 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ int		find_flag(t_tools tools, va_list ap)
 		va_arg(ap, void *);
 		return (0);
 	}
-    else if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
+	else if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
 		ret = convert_char(tools, ap);
 	else if (TYPE == 'd' || TYPE == 'i')
 		ret = convert_int(tools, ap);
-	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' || TYPE == 'o' || TYPE == 'O')
+	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' ||
+			TYPE == 'o' || TYPE == 'O')
 		ret = convert_ptr(tools, ap);
 	else if (TYPE == 'u' || TYPE == 'U')
 		ret = convert_ull(tools, ap);
@@ -98,11 +99,12 @@ int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 			tools = assign_format(tools, format, i);
 		else if (format[*i] == '%')
 			break ;
-		while ((ft_isdigit(format[*i + 1]) && format[*i + 1]) && (WIDTH || PREC))
+		while ((ft_isdigit(format[*i + 1]) && format[*i + 1]) &&
+				(WIDTH || PREC))
 			(*i)++;
 	}
 	TYPE = format[*i];
-	return(find_flag(tools, ap));
+	return (find_flag(tools, ap));
 }
 
 /*

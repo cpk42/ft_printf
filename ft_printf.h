@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 16:57:41 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:22:35 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define FLAGS(c) (c == ' ' || c == '-' || c == '+' || c == '0' || c == '#')
 
 # define FORMAT(c) (c == 'h' || c == 'l' || c == 'j' || c == 'z')
-
-# define ZPAD(c) (c == 'i' || c == 'u' || c == 'd' || c == 'x' || c == 'X' || c == 'o' || c == 'O')
 
 typedef	struct	s_tools
 {

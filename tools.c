@@ -6,15 +6,15 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 17:02:01 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:28:53 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_tools	reset_tools()
+t_tools			reset_tools(void)
 {
-	t_tools tools;
+	t_tools	tools;
 
 	PLUS = FALSE;
 	MINUS = FALSE;
@@ -35,10 +35,11 @@ t_tools	reset_tools()
 /*
 ** uses collected flags in tools struct to create final output string
 */
-int		use_tools(t_tools tools, char *arg)
+
+int				use_tools(t_tools tools, char *arg)
 {
-	char str[1024];
-	int ret;
+	char	str[1024];
+	int		ret;
 
 	ret = 0;
 	if (TYPE == '%')
@@ -68,7 +69,7 @@ int		use_tools(t_tools tools, char *arg)
 ** Assigns format h hh l ll j z to t_tools
 */
 
-t_tools	assign_format(t_tools tools, char *format, int *i)
+t_tools			assign_format(t_tools tools, char *format, int *i)
 {
 	if (format[*i + 1] && format[*i] == 'h' && format[*i + 1] == 'h')
 		FORM = 1;
@@ -91,7 +92,7 @@ t_tools	assign_format(t_tools tools, char *format, int *i)
 ** returns arg as format type
 */
 
-long long	use_format(t_tools tools, va_list ap)
+long long		use_format(t_tools tools, va_list ap)
 {
 	long long ret;
 
@@ -118,7 +119,7 @@ long long	use_format(t_tools tools, va_list ap)
 ** same as above but handles ull
 */
 
-__uint64_t	ull_use_format(t_tools tools, va_list ap)
+__uint64_t		ull_use_format(t_tools tools, va_list ap)
 {
 	__uint64_t ret;
 

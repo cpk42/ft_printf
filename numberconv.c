@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/12 15:28:24 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:19:47 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ char	*ft_itoh(unsigned long long int nbr, t_tools tools, char *str)
 	return (ft_strrev(str));
 }
 
+/*
+** converts integer to octal
+*/
+
 char	*ft_itoo(unsigned long long int nbr, t_tools tools, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!nbr)
@@ -58,7 +62,6 @@ char	*ft_itoo(unsigned long long int nbr, t_tools tools, char *str)
 		hash(tools, str);
 	return (ft_strrev(str));
 }
-
 
 /*
 ** ULL to ascii

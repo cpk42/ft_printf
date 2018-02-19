@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 16:58:23 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:23:31 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** use the tools struct to deal with the width / zero flags
 */
 
-void	width(char *str, t_tools tools, char *arg)
+void		width(char *str, t_tools tools, char *arg)
 {
 	int i;
 	int j;
@@ -42,7 +42,7 @@ void	width(char *str, t_tools tools, char *arg)
 ** use the tools struct to deal with precision
 */
 
-char	*precision(t_tools tools, char *arg, int j)
+char		*precision(t_tools tools, char *arg, int j)
 {
 	int		i;
 	char	*str;
@@ -58,7 +58,7 @@ char	*precision(t_tools tools, char *arg, int j)
 	i = str[0] == ' ' || str[0] == '-' || str[0] == '+' ? 1 : 0;
 	while (PREC > (int)ft_strlen(arg))
 	{
-		str[i++] = (ZERO || ZPAD(TYPE)) ? '0' : 32;
+		str[i++] = (ZERO || ft_findchar(TYPE, "iudxXoO")) ? '0' : 32;
 		PREC--;
 	}
 	while (arg[j] && PREC > 0)

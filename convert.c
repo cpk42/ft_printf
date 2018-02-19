@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 17:00:43 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:07:34 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	convert_int(t_tools tools, va_list ap)
 ** convert hex and ptr
 */
 
-int	convert_ptr(t_tools tools,  va_list ap)
+int	convert_ptr(t_tools tools, va_list ap)
 {
-	unsigned long long int nbr;
-	char	temp[1024];
-	int		ret;
+	unsigned long long int	nbr;
+	char					temp[1024];
+	int						ret;
 
 	ft_bzero(temp, 1024);
 	nbr = va_arg(ap, unsigned long long int);
@@ -90,10 +90,10 @@ int	convert_ptr(t_tools tools,  va_list ap)
 
 int	convert_ull(t_tools tools, va_list ap)
 {
-	unsigned long long int i;
-	char	*mem;
-	char	temp[1024];
-	int		ret;
+	unsigned long long int	i;
+	char					*mem;
+	char					temp[1024];
+	int						ret;
 
 	i = ull_use_format(tools, ap);
 	if (i)
