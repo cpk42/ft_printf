@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/17 20:16:39 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:02:57 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,19 @@ void	width(char *str, t_tools tools, char *arg)
 
 	j = 0;
 	i = 0;
-//	ft_putendl("\nARG");
-//	ft_putendl(arg);
-	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
+	if (arg[0] == '+' || arg[0] == '-' || arg[0] == 32)
 	{
-//		printf("\nCUR WIDTH: %s\n", ft_itoa(WIDTH));
-		str[i] = ZERO ? '0' : 32;
-		i++;
-	}
-	while (arg[j])
-	{
-		str[i] = arg[j];
+		str[i] = (arg[0] == '+') ? '+' : '-';
+		str[i] = (arg[0] == ' ') ? 32 : str[i];
 		i++;
 		j++;
 	}
+	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
+		str[i++] = ZERO ? '0' : 32;
+	while (arg[j])
+		str[i++] = arg[j++];
 	while (MINUS == true && WIDTH-- > (int)ft_strlen(arg))
-	{
-//		printf("\nCUR MINUS WIDTH: %s strlen: %zu ARG: %s\n", ft_itoa(WIDTH), ft_strlen(arg), arg);
-		str[i] = ZERO ? '0' : 32;
-		i++;
-	}
+		str[i++] = ZERO ? '0' : 32;
 }
 
 /*
@@ -56,7 +49,6 @@ char	*precision(t_tools tools, char *arg, int j)
 
 	str = ft_strnew(PREC + ft_strlen(arg));
 	ft_bzero(str, PREC + ft_strlen(arg));
-//	printf("\nPRECISION: %d\n", PREC);
 	if (SPACE && !NEG)
 		str[0] = ' ';
 	else if (PLUS && !NEG)
@@ -66,17 +58,15 @@ char	*precision(t_tools tools, char *arg, int j)
 	i = str[0] == ' ' || str[0] == '-' || str[0] == '+' ? 1 : 0;
 	while (PREC > (int)ft_strlen(arg))
 	{
-		str[i] = ZERO ? '0' : 32;
-		i++;
+		str[i++] = (ZERO || ZPAD(TYPE)) ? '0' : 32;
 		PREC--;
 	}
-	while (arg[j] && PREC--)
+	while (arg[j] && PREC > 0)
 	{
-		str[i] = arg[j];
-		i++;
-		j++;
+		str[i++] = arg[j++];
+		if (!ZPAD(TYPE))
+			PREC--;
 	}
-//	printf("\nstr: %s arg: %s\n", str, arg);
 	return (str);
 }
 /*

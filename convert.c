@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/17 19:11:29 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 15:59:25 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	convert_int(t_tools tools, va_list ap)
 
 	ft_bzero(temp, 1024);
 	i = use_format(tools, ap);
-	ZERO = true;
 	if (i == LL_MIN)
 		NEG = true;
 	if ((TYPE == 'i' || TYPE == 'd') && i != LL_MAX)
@@ -59,6 +58,8 @@ int	convert_int(t_tools tools, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
+	else if (!i)
+		temp[0] = '0';
 	ret = use_tools(tools, temp);
 	return (ret);
 }
@@ -75,7 +76,6 @@ int	convert_ptr(t_tools tools,  va_list ap)
 
 	ft_bzero(temp, 1024);
 	nbr = va_arg(ap, unsigned long long int);
-	ZERO = true;
 	if (TYPE == 'o' || TYPE == 'O')
 		ft_itoo(nbr, tools, temp);
 	else

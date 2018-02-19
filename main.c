@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:57:33 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/17 17:41:04 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:03:41 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main()
 	printf("_%+.7d_\n\n", 1234);
 	ft_printf("_%+.7d_\n", 1234);
 	printf("_%+.7d_\n\n", 1234);
-	ft_printf("_%-+7d_\n", 1234);
+	ft_printf("_%+-7d_\n", 1234);
 	printf("_%+-7d_\n\n", 1234);
 	ft_printf("_%+.7d_\n", -1234);
 	printf("_%+.7d_\n\n", -1234);
@@ -47,8 +47,8 @@ int	main()
 	printf("% 05d\n", 2035065302);
 	ft_printf("% 05d\n",-7);
 	printf("% 05d\n",-7);
-	ft_printf("% 05d\n",0);
-	printf("% 05d\n",0);
+	ft_printf("% 05d\n", 0);
+	printf("% 05d\n", 0);
 
     ft_printf("WIDTH ON STRING ARGS\n_%6s_\n", "string");
 	printf("_%6s_\n\n", "string");
@@ -73,7 +73,6 @@ int	main()
 	ft_printf("%-%\n");
 	printf("%-%\n\n");
 
-//	ft_printf("CONVERSIONS\n");
 
 	ft_printf("PRINTING MEMORY/HEXADECIMAL\n");
 	ft_printf("%p\n", "string");
@@ -246,5 +245,10 @@ int	main()
 	printf("-7 WIDTH 5 PREC _%-7.5s_\n\n", "string");
 	ft_printf("-5 WIDTH 4 PREC _%-5.4s_\n\n", "string");
 	printf("-5 WIDTH 4 PREC _%-5.4s_\n\n", "string");
+	printf("zu PREC 10 %.10zu\n\n", (unsigned long)123456);
+	printf("d PREC 10 %.10d\n\n", 123456);
+	printf("i PREC 10 %.10i\n\n", 123456);
+	printf("x PREC 10 %.10x\n\n", 123456);
+
 	return 1;
 }

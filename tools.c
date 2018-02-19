@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/17 20:16:26 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:04:08 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,7 @@ int		use_tools(t_tools tools, char *arg)
 			PREC = ft_strlen(arg);
 		if (!PREC)
 			PREC = ft_strlen(arg);
-//		if (PREC > WIDTH)
-//			PREC = WIDTH;
-		//printf("\n\n\nMINUS: %d WIDTH: %d PREC: %d PLUS: %d SPACE: %d NEG: %d\n", MINUS, WIDTH, PREC, PLUS, SPACE, NEG);
-//		printf("\n\nREAL WIDTH: %d\n\n", WIDTH);
 		arg = precision(tools, arg, 0);
-//		printf("ARG %s\n", arg);
 		width(str, tools, arg);
 		ft_putstr(str);
 		ret += ft_strlen(str);
@@ -166,14 +161,3 @@ t_tools	assign_flags(t_tools tools, char *format, int *i)
 		HASH = true;
 	return (tools);
 }
-
-/*
-		if (!PREC && WIDTH && WIDTH > (int)ft_strlen(arg))
-			PREC = WIDTH;
-		if (!WIDTH && !PREC)
-			WIDTH = ft_strlen(arg);
-		else if (!PREC)
-			PREC = ft_strlen(arg);
-		if ((((SPACE && WIDTH) || (ZERO && WIDTH)) && (MINUS || PLUS)) && WIDTH > (int)ft_strlen(arg))
-			PREC = WIDTH - 1;
- */
