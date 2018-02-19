@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:04:33 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/12 15:28:24 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** Int value to Hexadecimal
 */
+
 char	*ft_itoh(unsigned long long int nbr, t_tools tools, char *str)
 {
 	int i;
@@ -58,15 +59,16 @@ char	*ft_itoo(unsigned long long int nbr, t_tools tools, char *str)
 	return (ft_strrev(str));
 }
 
+
 /*
 ** ULL to ascii
 */
 
 char	*ft_ulltoa(__uint64_t nbr)
 {
-	int length;
-	__uint64_t sign;
-	char *str;
+	int			length;
+	__uint64_t	sign;
+	char		*str;
 
 	sign = nbr;
 	length = 1;

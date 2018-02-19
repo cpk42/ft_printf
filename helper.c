@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 21:07:27 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/22 21:08:47 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:44:01 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,19 @@ char	*ft_substr(int i, char *str)
 	while (i-- > 0)
 		str++;
 	return (str);
+}
+
+/*
+** Returns true or false whether or not a given character is found in a string
+*/
+
+int		ft_findchar(char c, char *search)
+{
+	while (*search)
+	{
+		if (*search == c)
+			return (1);
+		search++;
+	}
+	return (0);
 }

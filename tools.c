@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:46:15 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:02:01 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,52 @@ t_tools	reset_tools()
 {
 	t_tools tools;
 
-	PLUS = false;
-	MINUS = false;
-	ZERO = false;
-	SPACE = false;
-	HASH = false;
-	PREC = false;
-	NEG = false;
-	TYPE = 0;
-	WIDTH = 0;
-	PREC = 0;
-	FORM = 0;
-	LEN = 0;
+	PLUS = FALSE;
+	MINUS = FALSE;
+	ZERO = FALSE;
+	SPACE = FALSE;
+	HASH = FALSE;
+	PREC = FALSE;
+	NEG = FALSE;
+	PER = FALSE;
+	TYPE = FALSE;
+	WIDTH = FALSE;
+	PREC = FALSE;
+	FORM = FALSE;
+	LEN = FALSE;
 	return (tools);
 }
 
 /*
 ** uses collected flags in tools struct to create final output string
 */
-void	use_tools(char *str, t_tools tools, char *arg)
+int		use_tools(t_tools tools, char *arg)
 {
-	if (WIDTH < PREC)
-		WIDTH = PREC;
-	if (ZERO && !PREC) //used for edgecase ("%+05d", -7) && ("%+05d", 7)
-		PREC = WIDTH-1;
-	if (TYPE != '%')
-		arg = precision(tools, arg);
-	width(str, tools, arg);
-	if (PREC)
+	char str[1024];
+	int ret;
+
+	ret = 0;
+	if (TYPE == '%')
+	{
+		ft_putchar('%');
+		ret++;
+	}
+	else
+	{
+		ft_bzero(str, 1024);
+		if (!WIDTH && !PREC)
+			WIDTH = ft_strlen(arg);
+		if (PREC > (int)ft_strlen(arg) && TYPE == 's')
+			PREC = ft_strlen(arg);
+		if (!PREC)
+			PREC = ft_strlen(arg);
+		arg = precision(tools, arg, 0);
+		width(str, tools, arg);
+		ft_putstr(str);
+		ret += ft_strlen(str);
 		ft_strdel(&arg);
+	}
+	return (ret);
 }
 
 /*
@@ -122,25 +139,4 @@ __uint64_t	ull_use_format(t_tools tools, va_list ap)
 	else
 		ret = 0;
 	return (ret);
-}
-
-/*
-** Assigns flags to t_tools
-*/
-
-t_tools	assign_flags(t_tools tools, char *format, int *i)
-{
-	if (format[*i] == ' ')
-		SPACE = true;
-	else if (format[*i] == '+')
-		PLUS = true;
-	else if (format[*i] == '-')
-		MINUS = true;
-	else if (format[*i] == '0')
-		ZERO = true;
-	else if (format[*i] == '#')
-		HASH = true;
-//	if (SPACE && PLUS)
-//		SPACE = false;
-	return (tools);
 }

@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/25 18:34:09 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:10:59 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,46 @@
 ** % %%. No argument expected.
 */
 
-void	find_flag(t_tools tools, char *str, va_list ap)
+int		find_flag(t_tools tools, va_list ap)
 {
-    if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
-		convert_char(tools, str, ap);
+	int ret;
+
+	if (PER && !PREC)
+	{
+		va_arg(ap, void *);
+		return (0);
+	}
+    else if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
+		ret = convert_char(tools, ap);
 	else if (TYPE == 'd' || TYPE == 'i')
-		convert_int(tools, str, ap);
+		ret = convert_int(tools, ap);
 	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' || TYPE == 'o' || TYPE == 'O')
-		convert_ptr(tools, str, ap);
+		ret = convert_ptr(tools, ap);
 	else if (TYPE == 'u' || TYPE == 'U')
-		convert_ull(tools, str, ap);
+		ret = convert_ull(tools, ap);
+	else
+		ret = 0;
+	return (ret);
 }
 
 /*
 ** Handles every flag preceding the conversion character and assigns tools to it
 */
 
-int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap)
+int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 {
-	while (!CONVERSIONS(format[*i]) && format[(*i)++])
+	while (!ft_findchar(format[*i], "sSpdDioOuUxXcC") && format[(*i)++])
 	{
 		if (FLAGS(format[*i]))
 			tools = assign_flags(tools, format, i);
 		else if (ft_isdigit(format[*i]))
 			WIDTH = ft_atoi(ft_substr(*i, format));
 		else if (format[*i] == '.')
+		{
 			PREC = (format[*i + 1] && ft_isdigit(format[*i + 1])) ?
 				ft_atoi(ft_substr(*i + 1, format)) : 0;
+			PER = TRUE;
+		}
 		else if (FORMAT(format[*i]))
 			tools = assign_format(tools, format, i);
 		else if (format[*i] == '%')
@@ -89,90 +102,47 @@ int		parse_flag(char *format, t_tools tools, char *str, int *i, va_list ap)
 			(*i)++;
 	}
 	TYPE = format[*i];
-	find_flag(tools, str, ap);
-	return (*i);
+	return(find_flag(tools, ap));
 }
 
 /*
 ** parses orignal format string until a % char is found
 */
 
-int		parse_format(char *format, char *str, t_tools tools, va_list ap)
+int		parse_format(char *format, t_tools tools, va_list ap)
 {
 	int i;
-	int j;
-	
+	int ret;
+
+	ret = 0;
 	i = 0;
-	j = 0;
 	while (format[i])
 	{
 		if (format[i] != '%')
 		{
-			str[j] = format[i];
-			j++;
+			ft_putchar(format[i]);
+			ret++;
 		}
 		else
 		{
-			i = parse_flag(format, tools, str, &i, ap);
+			ret += parse_flag(format, tools, &i, ap);
 			tools = reset_tools();
-			j = ft_strlen(str);
 		}
 		i++;
 	}
-	return (i);
+	return (ret);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	t_tools tools;
-	char str[1024];
 	va_list ap;
-	
+	int		ret;
+
 	va_start(ap, format);
-	ft_bzero(str, 1024);
 	tools = reset_tools();
-	parse_format((char *)format, str, tools, ap);
-	ft_putstr(str);
+	ret = parse_format((char *)format, tools, ap);
 	va_end(ap);
-	return (1);
+	tools = reset_tools();
+	return (ret);
 }
-
-/*
-  sSpdDioOuUxXcC
-  char 1 byte-128 to 127 or 0 to 255
-  unsigned char 1 byte 0 to 255
-  signed char 1 byte-128 to 127
-  int2 or 4 bytes-32,768 to 32,767 or -2,147,483,648 to 2,147,483,647
-  unsigned int2 or 4 bytes0 to 65,535 or 0 to 4,294,967,295
-  short2 bytes-32,768 to 32,767
-  unsigned short2 bytes0 to 65,535
-  long4 bytes-2,147,483,648 to 2,147,483,647
-  unsigned long4 bytes0 to 4,294,967,295
-  float4 byte1.2E-38 to 3.4E+386 decimal places
-  double8 byte2.3E-308 to 1.7E+30815 decimal places
-  long double10 byte3.4E-4932 to 1.1E+493219 decimal places
-  unsigned long long 18,446,744,073,709,551,615.
-  \aaudible alert
-  \bbackspace
-  \fform feed
-  \nnewline, or linefeed
-  \rcarriage return
-  \ttab
-  \vvertical tab
-  \						\backslash
-  
-
-  %d %i     Decimal signed integer.
-  %o      Octal integer.
-  %x %X     Hex integer.
-  %u      Unsigned integer.
-  %c      Character.
-  %s      String. See below.
-  %f      double
-  %e %E     double.
-  %g %G     double.
-  %p        pointer.
-  %n      Number of characters written by this printf.
-  No argument expected.
-  % %%. No argument expected.
-*/

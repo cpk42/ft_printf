@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/01/23 12:36:04 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:58:23 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,51 +21,57 @@ void	width(char *str, t_tools tools, char *arg)
 	int i;
 	int j;
 
-	j = ft_strlen(str);
+	j = 0;
 	i = 0;
-	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
-		str[j++] = ZERO == true ? '0' : ' ';
-	while (arg[i])
+	if (arg[0] == '+' || arg[0] == '-' || arg[0] == 32)
 	{
-		str[j] = arg[i];
+		str[i] = (arg[0] == '+') ? '+' : '-';
+		str[i] = (arg[0] == ' ') ? 32 : str[i];
 		i++;
 		j++;
 	}
-	while (MINUS == true && WIDTH-- > (int)ft_strlen(arg))
-		str[j++] = ZERO == true ? '0' : ' ';
+	while (MINUS == FALSE && WIDTH-- > (int)ft_strlen(arg))
+		str[i++] = ZERO ? '0' : 32;
+	while (arg[j])
+		str[i++] = arg[j++];
+	while (MINUS == TRUE && WIDTH-- > (int)ft_strlen(arg))
+		str[i++] = ZERO ? '0' : 32;
 }
 
 /*
 ** use the tools struct to deal with precision
 */
 
-char	*precision(t_tools tools, char *arg)
+char	*precision(t_tools tools, char *arg, int j)
 {
 	int		i;
-	char	*mem;
+	char	*str;
 
-	i = 0;
-	mem = ft_strnew(ft_strlen(arg) + PREC+1);
-	mem[i] = (i == 0 && PLUS && !NEG) ? '+' : '0';
-	mem[i] = (NEG) ? '-' : mem[i];
-	mem[i] = (SPACE && !NEG) ? ' ' : mem[i];
-	i = (mem[i] == '-' || mem[i] == '+' || mem[i] == ' ') ? i+1 : i;
-	while (PREC-- > (int)ft_strlen(arg))
+	str = ft_strnew(PREC + ft_strlen(arg));
+	ft_bzero(str, PREC + ft_strlen(arg));
+	if (SPACE && !NEG)
+		str[0] = ' ';
+	else if (PLUS && !NEG)
+		str[0] = '+';
+	else if (NEG)
+		str[0] = '-';
+	i = str[0] == ' ' || str[0] == '-' || str[0] == '+' ? 1 : 0;
+	while (PREC > (int)ft_strlen(arg))
 	{
-		mem[i] = '0';
-		i++;
+		str[i++] = (ZERO || ZPAD(TYPE)) ? '0' : 32;
+		PREC--;
 	}
-	while (*arg)
+	while (arg[j] && PREC > 0)
 	{
-		mem[i] = *arg;
-		i++;
-		arg++;
+		str[i++] = arg[j++];
+		if (!ZPAD(TYPE))
+			PREC--;
 	}
-	return (mem);
+	return (str);
 }
 
 /*
-** handle the hash flag
+** Handle hash flag
 */
 
 void		hash(t_tools tools, char *arg)
@@ -77,4 +83,26 @@ void		hash(t_tools tools, char *arg)
 	}
 	if (TYPE == 'o' || TYPE == 'O')
 		arg[ft_strlen(arg)] = '0';
+}
+
+/*
+** Assigns flags to t_tools
+*/
+
+t_tools		assign_flags(t_tools tools, char *format, int *i)
+{
+	if (format[*i] == ' ')
+		SPACE = TRUE;
+	else if (format[*i] == '+')
+	{
+		PLUS = TRUE;
+		MINUS = FALSE;
+	}
+	else if (format[*i] == '-')
+		MINUS = TRUE;
+	else if (format[*i] == '0')
+		ZERO = TRUE;
+	else if (format[*i] == '#')
+		HASH = TRUE;
+	return (tools);
 }

@@ -6,33 +6,34 @@
 #    By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/20 15:48:29 by ckrommen          #+#    #+#              #
-#    Updated: 2018/01/22 21:07:18 by ckrommen         ###   ########.fr        #
+#    Updated: 2018/02/18 17:27:14 by ckrommen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRCS = tools.c ft_printf.c convert.c flags.c main.c numberconv.c helper.c
+SRCS = tools.c ft_printf.c convert.c flags.c numberconv.c helper.c
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = printf
+NAME = libftprintf.a
 
-LIBFT = ./libft/
+LIBFT = libft/*.c
+
+OBJS = *.o
 
 $(NAME):
-	@echo "Make Libft"
-	@$(MAKE) -C $(LIBFT)
-	@echo "Compiling source files"
-	@gcc $(FLAGS) $(SRCS) -L$(LIBFT) -lft -o $(NAME)
+	@echo "\033[32mCompiling source files\033[0m"
+	@gcc $(FLAGS) -c $(SRCS) $(LIBFT)
+	@ar rcs $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 all: $(NAME)
 
 clean:
-	@echo "Cleaning up"
-	@$(MAKE) clean -C $(LIBFT)
-	@rm -rf $(NAME)
+	@echo "\033[32mCleaning up\033[0m"
+	@rm -rf $(OBJS)
 
 fclean: clean
-	@echo "Full clean"
-	@$(MAKE) fclean -C $(LIBFT)
+	@echo "\033[32mFull clean\033[0m"
+	@rm -rf $(NAME)
 
 re: fclean all
