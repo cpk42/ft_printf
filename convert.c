@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 15:59:25 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:00:43 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	convert_int(t_tools tools, va_list ap)
 	ft_bzero(temp, 1024);
 	i = use_format(tools, ap);
 	if (i == LL_MIN)
-		NEG = true;
+		NEG = TRUE;
 	if ((TYPE == 'i' || TYPE == 'd') && i != LL_MAX)
 	{
-		NEG = i < 0 ? true : false;
+		NEG = i < 0 ? TRUE : FALSE;
 		i *= i < 0 ? -1 : 1;
 	}
 	if (i)

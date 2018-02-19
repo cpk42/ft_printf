@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 16:02:57 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:58:23 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	width(char *str, t_tools tools, char *arg)
 		i++;
 		j++;
 	}
-	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
+	while (MINUS == FALSE && WIDTH-- > (int)ft_strlen(arg))
 		str[i++] = ZERO ? '0' : 32;
 	while (arg[j])
 		str[i++] = arg[j++];
-	while (MINUS == true && WIDTH-- > (int)ft_strlen(arg))
+	while (MINUS == TRUE && WIDTH-- > (int)ft_strlen(arg))
 		str[i++] = ZERO ? '0' : 32;
 }
 
@@ -69,143 +69,9 @@ char	*precision(t_tools tools, char *arg, int j)
 	}
 	return (str);
 }
+
 /*
-char	*precision(t_tools tools, char *arg)
-{
-	char *str;
-	int	i;
-	int j;
-
-	j = 0;
-//	i = 0;
-	str = ft_strnew(PREC + ft_strlen(arg));
-//	i = (str[0] == ' ' || str[0] == '-' || str[0] == '+') ? 1 : 0;
-//	PREC = (str[0] == ' ' || str[0] == '-' || str[0] == '+' && ) ? PREC-1 : PREC;
-//	printf("PREC: %d\n", PREC);
-//	if ()
-//	if (PLUS || NEG)
-//	{
-//		str[i] = PLUS ? '+' : '-';
-//		str[i] =  (SPACE && !NEG) ? ' ' : str[i];
-//		i++;
-//	}
-	if (PLUS || NEG || SPACE)
-	{
-		str[0] = PLUS ? '+' : str[0];
-		str[0] = SPACE ? 32 : str[0];
-		str[0] = NEG ? '-' : str[0];
-//		PREC--;
-	}
-	i = (str[0] == ' ' || str[0] == '-' || str[0] == '+') ? 1 : 0;
-	while (PREC-- > (int)ft_strlen(arg))
-	{
-		str[i] = TYPE == 's' ? ' ' : '0';
-		i++;
-	}
-	while (*arg && PREC-- >= 0)
-	{
-		str[i] = arg[j];
-		i++;
-		j++;
-	}
-	return (str);
-}
-*/
-/*
-void	width(char *str, t_tools tools, char *arg)
-{
-	int i;
-	int j;
-
-	j = ft_strlen(str);
-	i = 0;
-	while (MINUS == false && WIDTH-- > (int)ft_strlen(arg))
-		str[j++] = ZERO == true ? '0' : ' ';
-	while (arg[i])
-	{
-		str[j] = arg[i];
-		i++;
-		j++;
-	}
-	while (MINUS == true && WIDTH-- > (int)ft_strlen(arg))
-		str[j++] = ZERO == true ? '0' : ' ';
-}
-
-
-char	*precision(t_tools tools, char *arg)
-{
-	char *mem;
-	int i;
-
-	i = 0;
-	mem = ft_strnew(PREC + ft_strlen(arg));
-	if (i == 0 && PLUS && !NEG)
-		mem[i] = '+';
-	else if (NEG)
-		mem[i] = '-';
-	else if (SPACE && !NEG)
-		mem[i] = ' ';
-	i = (mem[i] == '-' || mem[i] == '+' || mem[i] == ' ') ? i+1 : i;
-	while (PREC > (int)ft_strlen(arg))
-	{
-		mem[i] = TYPE != 's' ? '0' : 32;
-		PREC--;
-		i++;
-	}
-	while (PREC > 0 && *arg)
-	{
-		mem[i] = *arg;
-		i++;
-		arg++;
-		PREC--;
-	}
-	return (mem);
-	}*/
-/*
-char	*precision(t_tools tools, char *arg)
-{
-	int		i;
-	char	*mem;
-
-	i = 0;
-	mem = ft_strnew(ft_strlen(arg) + WIDTH + PREC);
-	mem[i] = (i == 0 && PLUS && !NEG) ? '+' : '0';
-	mem[i] = (NEG) ? '-' : mem[i];
-	mem[i] = (SPACE && !NEG) ? ' ' : mem[i];
-	
-	}*/
- /*
-char	*precision(t_tools tools, char *arg)
-{
-	int		i;
-	char	*mem;
-
-	i = 0;
-	mem = ft_strnew(ft_strlen(arg) + PREC+1);
-	mem[i] = (i == 0 && PLUS && !NEG) ? '+' : '0';
-	mem[i] = (NEG) ? '-' : mem[i];
-	mem[i] = (SPACE && !NEG) ? ' ' : mem[i];
-	i = (mem[i] == '-' || mem[i] == '+' || mem[i] == ' ') ? i+1 : i;
-	if (!PREC)
-		PREC = ft_strlen(arg);
-	while (PREC > (int)ft_strlen(arg))
-	{
-		mem[i] = TYPE != 's' ? '0' : 32;
-		PREC--;
-		i++;
-	}
-	while (*arg && PREC)
-	{
-		mem[i] = *arg;
-		i++;
-		arg++;
-		PREC--;
-	}
-	return (mem);
-}
- */
-/*
-** handle the hash flag
+** Handle hash flag
 */
 
 void		hash(t_tools tools, char *arg)
@@ -217,4 +83,26 @@ void		hash(t_tools tools, char *arg)
 	}
 	if (TYPE == 'o' || TYPE == 'O')
 		arg[ft_strlen(arg)] = '0';
+}
+
+/*
+** Assigns flags to t_tools
+*/
+
+t_tools		assign_flags(t_tools tools, char *format, int *i)
+{
+	if (format[*i] == ' ')
+		SPACE = TRUE;
+	else if (format[*i] == '+')
+	{
+		PLUS = TRUE;
+		MINUS = FALSE;
+	}
+	else if (format[*i] == '-')
+		MINUS = TRUE;
+	else if (format[*i] == '0')
+		ZERO = TRUE;
+	else if (format[*i] == '#')
+		HASH = TRUE;
+	return (tools);
 }

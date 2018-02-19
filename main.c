@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:57:33 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 16:03:41 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:12:55 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ int	main()
 	printf("d PREC 10 %.10d\n\n", 123456);
 	printf("i PREC 10 %.10i\n\n", 123456);
 	printf("x PREC 10 %.10x\n\n", 123456);
-
+	ft_printf("%.s%10s\n\n", "new", "string");
+	printf("%.s%10s\n\n", "new", "string");
 	return 1;
 }

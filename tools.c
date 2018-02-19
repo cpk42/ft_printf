@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 16:04:08 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:02:01 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@ t_tools	reset_tools()
 {
 	t_tools tools;
 
-	PLUS = false;
-	MINUS = false;
-	ZERO = false;
-	SPACE = false;
-	HASH = false;
-	PREC = false;
-	NEG = false;
-	TYPE = 0;
-	WIDTH = 0;
-	PREC = 0;
-	FORM = 0;
-	LEN = 0;
+	PLUS = FALSE;
+	MINUS = FALSE;
+	ZERO = FALSE;
+	SPACE = FALSE;
+	HASH = FALSE;
+	PREC = FALSE;
+	NEG = FALSE;
+	PER = FALSE;
+	TYPE = FALSE;
+	WIDTH = FALSE;
+	PREC = FALSE;
+	FORM = FALSE;
+	LEN = FALSE;
 	return (tools);
 }
 
@@ -138,26 +139,4 @@ __uint64_t	ull_use_format(t_tools tools, va_list ap)
 	else
 		ret = 0;
 	return (ret);
-}
-
-/*
-** Assigns flags to t_tools
-*/
-
-t_tools	assign_flags(t_tools tools, char *format, int *i)
-{
-	if (format[*i] == ' ')
-		SPACE = true;
-	else if (format[*i] == '+')
-	{
-		PLUS = true;
-		MINUS = false;
-	}
-	else if (format[*i] == '-')
-		MINUS = true;
-	else if (format[*i] == '0')
-		ZERO = true;
-	else if (format[*i] == '#')
-		HASH = true;
-	return (tools);
 }
