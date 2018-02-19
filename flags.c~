@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 21:31:45 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:23:31 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		*precision(t_tools tools, char *arg, int j)
 	while (arg[j] && PREC > 0)
 	{
 		str[i++] = arg[j++];
-		if (!ft_findchar(TYPE, "iudxXoO"))
+		if (!ZPAD(TYPE))
 			PREC--;
 	}
 	return (str);
