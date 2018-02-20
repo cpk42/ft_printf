@@ -102,6 +102,7 @@ int	convert_ull(t_tools tools, va_list ap)
 	char					temp[1024];
 	int						ret;
 
+	ft_bzero(temp, 1024);
 	i = ull_use_format(tools, ap);
 	if (i)
 	{
@@ -109,6 +110,8 @@ int	convert_ull(t_tools tools, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
+	else if (!i)
+		temp[0] = '0';
 	ret = use_tools(tools, temp, 0);
 	return (ret);
 }
