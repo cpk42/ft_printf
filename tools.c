@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:30:37 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:52:00 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ long long		use_format(t_tools tools, va_list ap)
 	if (!FORM)
 		ret = va_arg(ap, int);
 	else if (FORM == 1)
-		ret = (short int)va_arg(ap, int);
+		ret = (short int)va_arg(ap, short int);
 	else if (FORM == 2)
-		ret = (short int)va_arg(ap, int);
+		ret = (short int)va_arg(ap, short int);
 	else if (FORM == 3)
 		ret = va_arg(ap, long int);
 	else if (FORM == 4)
@@ -126,9 +126,9 @@ __uint64_t		ull_use_format(t_tools tools, va_list ap)
 	if (!FORM)
 		ret = va_arg(ap, unsigned int);
 	else if (FORM == 1)
-		ret = (unsigned short int)va_arg(ap, unsigned int);
+		ret = (unsigned short int)va_arg(ap, unsigned short int);
 	else if (FORM == 2)
-		ret = (unsigned short int)va_arg(ap, unsigned int);
+		ret = (unsigned short int)va_arg(ap, unsigned short int);
 	else if (FORM == 3)
 		ret = va_arg(ap, unsigned long int);
 	else if (FORM == 4)
