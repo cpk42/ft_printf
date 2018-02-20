@@ -22,9 +22,9 @@ int	convert_char(t_tools tools, va_list ap)
 	int		ret;
 
 	ft_bzero(temp, 1024);
-	if (TYPE == 's')
+	if (TYPE == 's' || TYPE == 'S')
 		ft_strcpy(temp, va_arg(ap, char *));
-	else if (TYPE == 'c')
+	else if (TYPE == 'c' || TYPE == 'C')
 		temp[0] = va_arg(ap, int);
 	else if (TYPE == '%')
 		temp[0] = '%';
