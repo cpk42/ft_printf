@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:14:11 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:29:29 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	convert_char(t_tools tools, va_list ap)
 		temp[0] = va_arg(ap, int);
 	else if (TYPE == '%')
 		temp[0] = '%';
-	ret = use_tools(tools, temp);
+	ret = use_tools(tools, temp, 0);
 	return (ret);
 }
 
@@ -60,7 +60,7 @@ int	convert_int(t_tools tools, va_list ap)
 	}
 	else if (!i)
 		temp[0] = '0';
-	ret = use_tools(tools, temp);
+	ret = use_tools(tools, temp, 0);
 	return (ret);
 }
 
@@ -80,7 +80,7 @@ int	convert_ptr(t_tools tools, va_list ap)
 		ft_itoabase(nbr, tools, temp, 8);
 	else
 		ft_itoabase(nbr, tools, temp, 16);
-	ret = use_tools(tools, temp);
+	ret = use_tools(tools, temp, 0);
 	return (ret);
 }
 
@@ -102,7 +102,7 @@ int	convert_ull(t_tools tools, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
-	ret = use_tools(tools, temp);
+	ret = use_tools(tools, temp, 0);
 	return (ret);
 }
 
@@ -127,13 +127,13 @@ int	convert_wchar(t_tools tools, va_list ap, int ret)
 			str = ft_strjoin(str, ft_unitoa(*w_str++));
 			ft_strdel(&temp);
 		}
-		ret = use_tools(tools, str);
+		ret = use_tools(tools, str, 0);
 	}
 	else if (TYPE == 'c' || TYPE == 'C')
 	{
 		c = va_arg(ap, wint_t);
 		str = ft_unitoa(c);
-		ret = use_tools(tools, str);
+		ret = use_tools(tools, str, 0);
 	}
 	return (ret);
 }

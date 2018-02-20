@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 21:28:53 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:30:37 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ t_tools			reset_tools(void)
 ** uses collected flags in tools struct to create final output string
 */
 
-int				use_tools(t_tools tools, char *arg)
+int				use_tools(t_tools tools, char *arg, int ret)
 {
 	char	str[1024];
-	int		ret;
 
-	ret = 0;
 	if (TYPE == '%')
 	{
 		ft_putchar('%');
@@ -50,6 +48,8 @@ int				use_tools(t_tools tools, char *arg)
 	else
 	{
 		ft_bzero(str, 1024);
+		if (PREC && ZERO)
+			ZERO = FALSE;
 		if (!WIDTH && !PREC)
 			WIDTH = ft_strlen(arg);
 		if (PREC > (int)ft_strlen(arg) && TYPE == 's')

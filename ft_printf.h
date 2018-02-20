@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:17:05 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:35:11 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int				print_buffer(t_tools tools, va_list ap);
 */
 
 t_tools			reset_tools();
-int				use_tools(t_tools tools, char *arg);
+int				use_tools(t_tools tools, char *arg, int ret);
 t_tools			assign_format(t_tools tools, char *format, int *i);
 long long		use_format(t_tools tools, va_list ap);
 __uint64_t		ull_use_format(t_tools tools, va_list ap);
