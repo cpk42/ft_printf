@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 21:22:35 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:17:05 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdint.h>
+# include <wchar.h>
+# include <locale.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -70,6 +72,7 @@ int				ft_printf(const char *format, ...);
 char			*ft_substr(int i, char *str);
 char			*ft_strrev(char *str);
 int				ft_findchar(char c, char *search);
+void			ft_putwstr(wchar_t *str);
 
 /*
 ** Parsing and solving funcs
@@ -87,7 +90,7 @@ int				convert_char(t_tools tools, va_list ap);
 int				convert_int(t_tools tools, va_list ap);
 int				convert_ptr(t_tools tools, va_list ap);
 int				convert_ull(t_tools tools, va_list ap);
-int				convert_wchar(t_tools tools, va_list ap);
+int				convert_wchar(t_tools tools, va_list ap, int ret);
 
 /*
 ** Flag management funcs
@@ -96,6 +99,7 @@ int				convert_wchar(t_tools tools, va_list ap);
 void			width(char *str, t_tools tools, char *arg);
 char			*precision(t_tools tools, char *arg, int j);
 void			hash(t_tools tools, char *str);
+int				print_buffer(t_tools tools, va_list ap);
 
 /*
 ** Extra tool funcs
@@ -113,7 +117,8 @@ t_tools			assign_flags(t_tools tools, char *format, int *i);
 */
 
 char			*ft_ulltoa(__uint64_t nbr);
-char			*ft_itoh(unsigned long long int nbr, t_tools tools, char *str);
-char			*ft_itoo(unsigned long long int nbr, t_tools tools, char *str);
+char			*ft_itoabase(unsigned long long int nbr, t_tools tools,
+						char *str, int base);
+char			*ft_unitoa(wint_t wstr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/18 20:53:19 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:14:48 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ int		find_flag(t_tools tools, va_list ap)
 	int ret;
 
 	if (PER && !PREC)
-	{
-		va_arg(ap, void *);
-		return (0);
-	}
+		return (print_buffer(tools, ap));
+	else if (TYPE == 'S' || TYPE == 'C' || (TYPE == 's' && FORM == 3)
+			|| (TYPE == 'c' && FORM == 3))
+		ret = convert_wchar(tools, ap, 0);
 	else if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
 		ret = convert_char(tools, ap);
-	else if (TYPE == 'd' || TYPE == 'i')
+	else if (TYPE == 'd' || TYPE == 'i' || (TYPE == 'D' && FORM))
 		ret = convert_int(tools, ap);
 	else if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X' ||
 			TYPE == 'o' || TYPE == 'O')
 		ret = convert_ptr(tools, ap);
-	else if (TYPE == 'u' || TYPE == 'U')
+	else if (TYPE == 'u' || TYPE == 'U' || (TYPE == 'D' && !FORM))
 		ret = convert_ull(tools, ap);
 	else
 		ret = 0;
