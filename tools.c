@@ -29,6 +29,7 @@ t_tools			reset_tools(void)
 	PREC = FALSE;
 	FORM = FALSE;
 	LEN = FALSE;
+	WIDE = FALSE;
 	return (tools);
 }
 

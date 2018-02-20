@@ -60,10 +60,11 @@ int		find_flag(t_tools tools, va_list ap)
 
 	if (PER && !PREC)
 		return (print_buffer(tools, ap));
-	else if (TYPE == 'S' || TYPE == 'C' || (TYPE == 's' && FORM == 3)
-			|| (TYPE == 'c' && FORM == 3))
+	else if ((TYPE == 'S' && WIDE) || (TYPE == 'C' && WIDE) ||
+		 (TYPE == 's' && FORM == 3) || (TYPE == 'c' && FORM == 3))
 		ret = convert_wchar(tools, ap, 0);
-	else if (TYPE == 's' || TYPE == 'c' || TYPE == '%')
+	else if (TYPE == 's' || TYPE == 'c' || TYPE == '%' ||
+		 (TYPE == 'C' && !WIDE) || (TYPE == 'S' && !WIDE))
 		ret = convert_char(tools, ap);
 	else if (TYPE == 'd' || TYPE == 'i' || (TYPE == 'D' && FORM))
 		ret = convert_int(tools, ap);
@@ -87,6 +88,8 @@ int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 	{
 		if (FLAGS(format[*i]))
 			tools = assign_flags(tools, format, i);
+		else if (format[*i] == 'w')
+		  WIDE = TRUE;
 		else if (ft_isdigit(format[*i]))
 			WIDTH = ft_atoi(ft_substr(*i, format));
 		else if (format[*i] == '.')

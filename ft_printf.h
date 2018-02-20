@@ -41,6 +41,7 @@
 # define LEN tools.len
 # define NEG tools.neg
 # define PER tools.per
+# define WIDE tools.wide
 
 # define FLAGS(c) (c == ' ' || c == '-' || c == '+' || c == '0' || c == '#')
 
@@ -62,6 +63,7 @@ typedef	struct	s_tools
 	int		argument;
 	int		form;
 	int		len;
+	int		wide;
 }				t_tools;
 
 /*
