@@ -18,11 +18,11 @@
 
 int	convert_char(t_tools tools, va_list ap)
 {
-	char	temp[1024];
+	char	temp[9216];
 	char	*mem;
 	int		ret;
 
-	ft_bzero(temp, 1024);
+	ft_bzero(temp, 9216);
 	if (TYPE == 's' || TYPE == 'S')
 	{
 		mem = va_arg(ap, char *);
@@ -45,12 +45,12 @@ int	convert_char(t_tools tools, va_list ap)
 
 int	convert_int(t_tools tools, va_list ap)
 {
-	char		temp[1024];
+	char		temp[9216];
 	char		*mem;
 	int			ret;
 	long long	i;
 
-	ft_bzero(temp, 1024);
+	ft_bzero(temp, 9216);
 	i = use_format(tools, ap);
 	if (i == LL_MIN)
 		NEG = TRUE;
@@ -78,10 +78,10 @@ int	convert_int(t_tools tools, va_list ap)
 int	convert_ptr(t_tools tools, va_list ap)
 {
 	unsigned long long int	nbr;
-	char					temp[1024];
+	char					temp[9216];
 	int						ret;
 
-	ft_bzero(temp, 1024);
+	ft_bzero(temp, 9216);
 	nbr = va_arg(ap, unsigned long long int);
 	if (TYPE == 'o' || TYPE == 'O')
 	{
@@ -106,10 +106,10 @@ int	convert_ull(t_tools tools, va_list ap)
 {
 	unsigned long long int	i;
 	char					*mem;
-	char					temp[1024];
+	char					temp[9216];
 	int						ret;
 
-	ft_bzero(temp, 1024);
+	ft_bzero(temp, 9216);
 	i = ull_use_format(tools, ap);
 	if (i)
 	{

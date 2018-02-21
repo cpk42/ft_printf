@@ -39,7 +39,7 @@ t_tools			reset_tools(void)
 
 int				use_tools(t_tools tools, char *arg, int ret)
 {
-	char	str[1024];
+	char	str[9216];
 
 	if (TYPE == '%' || (((TYPE == 'c' || TYPE == 'C') && !*arg)))
 	{
@@ -48,7 +48,7 @@ int				use_tools(t_tools tools, char *arg, int ret)
 	}
 	else
 	{
-		ft_bzero(str, 1024);
+		ft_bzero(str, 9216);
 		if (PREC && ZERO)
 			ZERO = FALSE;
 		if (!WIDTH && !PREC)
