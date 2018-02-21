@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:54:52 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:37:30 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				use_tools(t_tools tools, char *arg, int ret)
 {
 	char	str[1024];
 
-	if (TYPE == '%' || TYPE == 'c' || TYPE == 'C')
+	if (TYPE == '%' || ((TYPE == 'c' || TYPE == 'C') && !*arg))
 		ft_putchar((TYPE == '%' && (ret++)) ? '%' : '\0');
 	else
 	{
