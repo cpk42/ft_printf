@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:14:48 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/20 16:54:30 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int		find_flag(t_tools tools, va_list ap)
 
 	if (PER && !PREC)
 		return (print_buffer(tools, ap));
-	else if ((TYPE == 'S' && WIDE) || (TYPE == 'C' && WIDE) ||
-		 (TYPE == 's' && FORM == 3) || (TYPE == 'c' && FORM == 3))
+	else if ((TYPE == 'S') || (TYPE == 'C' && WIDE) ||
+			(TYPE == 's' && FORM == 3) || (TYPE == 'c' && FORM == 3))
 		ret = convert_wchar(tools, ap, 0);
 	else if (TYPE == 's' || TYPE == 'c' || TYPE == '%' ||
-		 (TYPE == 'C' && !WIDE) || (TYPE == 'S' && !WIDE))
+			(TYPE == 'C' && !WIDE) || (TYPE == 'S' && !WIDE))
 		ret = convert_char(tools, ap);
 	else if (TYPE == 'd' || TYPE == 'i' || (TYPE == 'D' && FORM))
 		ret = convert_int(tools, ap);
@@ -89,7 +89,7 @@ int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 		if (FLAGS(format[*i]))
 			tools = assign_flags(tools, format, i);
 		else if (format[*i] == 'w')
-		  WIDE = TRUE;
+			WIDE = TRUE;
 		else if (ft_isdigit(format[*i]))
 			WIDTH = ft_atoi(ft_substr(*i, format));
 		else if (format[*i] == '.')
