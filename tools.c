@@ -41,11 +41,8 @@ int				use_tools(t_tools tools, char *arg, int ret)
 {
 	char	str[1024];
 
-	if (TYPE == '%')
-	{
-		ft_putchar('%');
-		ret++;
-	}
+	if (TYPE == '%' || TYPE == 'c' || TYPE == 'C')
+		ft_putchar((TYPE == '%' && (ret++)) ? '%' : '\0');
 	else
 	{
 		ft_bzero(str, 1024);
