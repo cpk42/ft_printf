@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:35:11 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/20 20:09:54 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char			*ft_substr(int i, char *str);
 char			*ft_strrev(char *str);
 int				ft_findchar(char c, char *search);
 void			ft_putwstr(wchar_t *str);
+int				ft_printnorm(char *str, int *i);
 
 /*
 ** Parsing and solving funcs

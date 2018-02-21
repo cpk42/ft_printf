@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:37:32 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/20 20:10:22 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,15 @@ t_tools		assign_flags(t_tools tools, char *format, int *i)
 	else if (format[*i] == '#')
 		HASH = TRUE;
 	return (tools);
+}
+
+/*
+** print flag as normal string if unsupported flags found
+*/
+
+int			ft_printnorm(char *str, int *i)
+{
+	while (str[*i] != '%')
+		--(*i);
+	return (1);
 }
