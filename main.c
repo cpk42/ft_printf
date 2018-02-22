@@ -6,27 +6,28 @@
 //#include <sys/types.h>
 //#include <sys/stat.h>
 //#include <limits.h>
-#include "../ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 int        main(void)
 {
-    char        *str = NULL;
+//    char        *str = NULL;
 
 //	printf("%*s\n", "string");
-    ft_printf("%s", "pouet");
-    ft_printf(" pouet %s !!\n", "camembert");
-    ft_printf("%s !\n", "Ceci n'est pas un \0 exercice !");
-    ft_printf("%s!\n", "Ceci n'est toujours pas un exercice !");
+//    ft_printf("%s", "pouet");
+	//   ft_printf(" pouet %s !!\n", "camembert");
+//	ft_printf("%s !\n", "Ceci n'est pas un \0 exercice !");
+//    ft_printf("%s!\n", "Ceci n'est toujours pas un exercice !");
     // printf("%s\n", str);
-    ft_printf("%s!\n\n", str);
+//    ft_printf("%s!\n\n", str);
 //	ft_printf("%.f\n\n", "string");
 //	ft_printf("%c\n", L'ß');
 //	printf("%c\n", L'ß');
 	char *ptr;
 
+//	printf("%d\n", i);
 	ptr = ft_strnew(7);
-	ptr = "string";
-	ft_printf("%X\n", -42);
+	ptr = "monkey";
+/*	ft_printf("%X\n", -42);
 	printf("%X\n", -42);
 	ft_printf("%x\n", -42);
 	printf("%x\n", -42);
@@ -44,8 +45,16 @@ int        main(void)
 	printf("%p\n\n", "string");
 	ft_printf("%p\n", "new");
 	printf("%p\n\n", "new");
-	ft_printf("%p\n", ptr);
-	printf("%p\n\n", ptr);
+	ft_printf("%p\n", ptr);*/
+	printf("%p\n", ptr);
+	ft_printf("%p\n\n", ptr);
+	printf("%p\n", "string");
+	ft_printf("%p\n\n", "string");
+	printf("%p\n", "s");
+	ft_printf("%p\n\n", "s");
+//	while (1)
+//		 ;
+//	ft_strdel(&ptr);
 //	printf("%*.s", "string");
 //	ft_printf("%5.7c\n", 'c');
 //	printf("%5.7c\n\n", 'c');

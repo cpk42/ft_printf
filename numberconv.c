@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 18:16:21 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 15:45:32 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,30 @@ char	*ft_unitoa(wint_t wstr)
 		str[3] = (((wstr >> 0) & 0x3F) | 0x80);
 	}
 	return (str);
+}
+
+char	*ft_itoh(unsigned int nbr, t_tools tools, char *str)
+{
+	int i;
+
+	i = 0;
+	if (!nbr)
+		str[i] = '0';
+	if (TYPE == 'x' || TYPE == 'p' || TYPE == 'o')
+	{
+		while (nbr != 0)
+		{
+			str[i++] = "0123456789abcdef"[nbr % 16];
+			nbr /= 16;
+		}
+	}
+	else
+		while (nbr != 0)
+		{
+			str[i++] = "0123456789ABCDEF"[nbr % 16];
+			nbr /= 16;
+		}
+	if (HASH || TYPE == 'p')
+		hash(tools, str);
+	return (ft_strrev(str));
 }

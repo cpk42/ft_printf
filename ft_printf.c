@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 16:07:19 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:42:39 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,5 @@ int		ft_printf(const char *format, ...)
 	tools = reset_tools();
 	ret = parse_format((char *)format, tools, ap);
 	va_end(ap);
-	tools = reset_tools();
 	return (ret);
 }
