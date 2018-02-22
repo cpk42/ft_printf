@@ -22,7 +22,10 @@ int        main(void)
 //	ft_printf("%.f\n\n", "string");
 //	ft_printf("%c\n", L'ß');
 //	printf("%c\n", L'ß');
+	char *ptr;
 
+	ptr = ft_strnew(7);
+	ptr = "string";
 	ft_printf("%X\n", -42);
 	printf("%X\n", -42);
 	ft_printf("%x\n", -42);
@@ -41,6 +44,8 @@ int        main(void)
 	printf("%p\n\n", "string");
 	ft_printf("%p\n", "new");
 	printf("%p\n\n", "new");
+	ft_printf("%p\n", ptr);
+	printf("%p\n\n", ptr);
 //	printf("%*.s", "string");
 //	ft_printf("%5.7c\n", 'c');
 //	printf("%5.7c\n\n", 'c');
