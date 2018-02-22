@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 14:39:46 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 16:07:19 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 			tools = assign_format(tools, format, i);
 		else if (format[*i] == '%')
 			break ;
-		while (ft_isdigit(format[*i + 1]) && format[*i + 1] && (WIDTH || PREC))
+		while ((ft_isdigit(format[*i + 1]) && format[*i + 1]) &&
+			   (WIDTH || PREC))
 			(*i)++;
 	}
 	TYPE = format[*i];

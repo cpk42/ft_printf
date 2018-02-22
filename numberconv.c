@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 19:16:51 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:16:21 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Int value to Hexadecimal
 */
 
-char	*ft_itoabase(unsigned long long int nbr, t_tools tools,
+char	*ft_itoabase(unsigned int nbr, t_tools tools,
 					char *str, int base)
 {
 	int i;

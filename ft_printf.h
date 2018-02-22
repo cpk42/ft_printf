@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/20 20:09:54 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:07:29 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char			*ft_strrev(char *str);
 int				ft_findchar(char c, char *search);
 void			ft_putwstr(wchar_t *str);
 int				ft_printnorm(char *str, int *i);
+int				ft_specialbuffer(t_tools tools, char *arg);
 
 /*
 ** Parsing and solving funcs
@@ -120,7 +121,7 @@ t_tools			assign_flags(t_tools tools, char *format, int *i);
 */
 
 char			*ft_ulltoa(__uint64_t nbr);
-char			*ft_itoabase(unsigned long long int nbr, t_tools tools,
+char			*ft_itoabase(unsigned int nbr, t_tools tools,
 						char *str, int base);
 char			*ft_unitoa(wint_t wstr);
 

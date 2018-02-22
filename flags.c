@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 14:35:21 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:14:40 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,19 @@ char		*precision(t_tools tools, char *arg, int j)
 
 void		hash(t_tools tools, char *arg)
 {
-	if (TYPE == 'p' || TYPE == 'x' || TYPE == 'X')
+	if (TYPE == 'x' || TYPE == 'X')
 	{
 		arg[ft_strlen(arg)] = TYPE == 'X' ? 'X' : 'x';
 		arg[ft_strlen(arg)] = '0';
 	}
-	if (TYPE == 'o' || TYPE == 'O')
+	else if (TYPE == 'p')
+	{
+		arg[ft_strlen(arg)] = '0';
+		arg[ft_strlen(arg)] = '1';
+		arg[ft_strlen(arg)] = 'x';
+		arg[ft_strlen(arg)] = '0';
+	}
+	else if (TYPE == 'o' || TYPE == 'O')
 		arg[ft_strlen(arg)] = '0';
 }
 

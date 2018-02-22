@@ -6,11 +6,11 @@
 #    By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/20 15:48:29 by ckrommen          #+#    #+#              #
-#    Updated: 2018/02/18 17:27:14 by ckrommen         ###   ########.fr        #
+#    Updated: 2018/02/21 16:20:42 by ckrommen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRCS = tools.c ft_printf.c convert.c flags.c numberconv.c helper.c
+SRCS = tools.c ft_printf.c convert.c flags.c numberconv.c helper.c buffer.c
 
 FLAGS = -Wall -Wextra -Werror
 

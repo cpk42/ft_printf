@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 13:19:48 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 17:11:06 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int				use_tools(t_tools tools, char *arg, int ret)
 	char	str[9216];
 
 	if (TYPE == '%' || (((TYPE == 'c' || TYPE == 'C') && !*arg)))
-	{
-		ft_putchar((TYPE == '%') ? '%' : 0);
-		ret++;
-	}
+		ret += ft_specialbuffer(tools, arg);
 	else
 	{
 		ft_bzero(str, 9216);
+		if (TYPE == 'c' || TYPE == 'C')
+			PREC = 0;
 		if (PREC && ZERO)
 			ZERO = FALSE;
 		if (!WIDTH && !PREC)

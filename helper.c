@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 21:07:27 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/19 17:11:24 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/21 16:20:33 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,4 @@ void	ft_putwstr(wchar_t *str)
 	p = str;
 	while (*str)
 		write(1, str++, 1);
-}
-
-/*
-** used to print a space buffer if only a period is provided for precision
-*/
-
-int		print_buffer(t_tools tools, va_list ap)
-{
-	int ret;
-
-	ret = 0;
-	while (WIDTH--)
-	{
-		ft_putchar(ZERO ? '0' : 32);
-		ret++;
-	}
-	va_arg(ap, void *);
-	return (ret);
 }
