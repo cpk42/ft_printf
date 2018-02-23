@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:19:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:16:38 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 15:47:49 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** used to print a space buffer if only a period is provided for precision
 */
 
-int		print_buffer(t_tools tools, va_list ap)
+int		print_buffer(t_tools tools)
 {
 	int ret;
 
@@ -26,7 +26,6 @@ int		print_buffer(t_tools tools, va_list ap)
 		ft_putchar(ZERO ? '0' : 32);
 		ret++;
 	}
-	va_arg(ap, void *);
 	return (ret);
 }
 
@@ -54,4 +53,32 @@ int		ft_specialbuffer(t_tools tools, char *arg)
 		ft_putchar(ZERO ? '0' : 32);
 	}
 	return (ret);
+}
+
+/*
+** Fix memory signature for 0 padding on hexadecimal
+*/
+
+void	ft_alignptr(char *str, t_tools tools)
+{
+	int i;
+
+	i = 0;
+	if (str[i] == '0')
+	{
+		while (str[i] != 'x' && str[i] != 'X')
+			i++;
+		str[i] = '0';
+		str[1] = TYPE == 'X' ? 'X' : 'x';
+	}
+}
+
+/*
+** putchar that returns 1
+*/
+
+int		ft_retchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
 }

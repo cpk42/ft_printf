@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 10:46:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:15:33 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 21:15:27 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		width(char *str, t_tools tools, char *arg)
 
 	j = 0;
 	i = 0;
-	if (arg[0] == '+' || arg[0] == '-' || arg[0] == 32)
+	if ((arg[0] == '+' || arg[0] == '-' || arg[0] == 32) && ZERO)
 	{
 		str[i] = (arg[0] == '+') ? '+' : '-';
 		str[i] = (arg[0] == ' ') ? 32 : str[i];
@@ -32,6 +32,13 @@ void		width(char *str, t_tools tools, char *arg)
 	}
 	while (MINUS == FALSE && WIDTH-- > (int)ft_strlen(arg))
 		str[i++] = ZERO ? '0' : 32;
+	if ((arg[0] == '+' || arg[0] == '-' || arg[0] == 32) && !ZERO)
+	{
+		str[i] = (arg[0] == '+') ? '+' : '-';
+		str[i] = (arg[0] == ' ') ? 32 : str[i];
+		i++;
+		j++;
+	}
 	while (arg[j])
 		str[i++] = arg[j++];
 	while (MINUS == TRUE && WIDTH-- > (int)ft_strlen(arg))
@@ -76,6 +83,9 @@ char		*precision(t_tools tools, char *arg, int j)
 
 void		hash(t_tools tools, char *arg)
 {
+	int i;
+
+	i = 0;
 	if (TYPE == 'x' || TYPE == 'X')
 	{
 		arg[ft_strlen(arg)] = TYPE == 'X' ? 'X' : 'x';
@@ -99,10 +109,7 @@ t_tools		assign_flags(t_tools tools, char *format, int *i)
 	if (format[*i] == ' ')
 		SPACE = TRUE;
 	else if (format[*i] == '+')
-	{
 		PLUS = TRUE;
-		MINUS = FALSE;
-	}
 	else if (format[*i] == '-')
 		MINUS = TRUE;
 	else if (format[*i] == '0')

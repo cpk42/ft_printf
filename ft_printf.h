@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:45:31 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 15:48:51 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			*ft_strrev(char *str);
 int				ft_findchar(char c, char *search);
 void			ft_putwstr(wchar_t *str);
 int				ft_printnorm(char *str, int *i);
-int				ft_specialbuffer(t_tools tools, char *arg);
+int				ft_retchar(char c);
 
 /*
 ** Parsing and solving funcs
@@ -103,7 +103,9 @@ int				convert_wchar(t_tools tools, va_list ap, int ret);
 void			width(char *str, t_tools tools, char *arg);
 char			*precision(t_tools tools, char *arg, int j);
 void			hash(t_tools tools, char *str);
-int				print_buffer(t_tools tools, va_list ap);
+int				print_buffer(t_tools tools);
+int				ft_specialbuffer(t_tools tools, char *arg);
+void			ft_alignptr(char *arg, t_tools tools);
 
 /*
 ** Extra tool funcs

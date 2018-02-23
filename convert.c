@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 18:09:45 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 15:54:55 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	convert_int(t_tools tools, va_list ap)
 		ft_strcpy(temp, mem);
 		ft_strdel(&mem);
 	}
-	else if (!i)
+	else if (!i && (!PER && !PREC))
 		temp[0] = '0';
 	ret = use_tools(tools, temp, 0);
 	return (ret);
@@ -82,20 +82,18 @@ int	convert_ptr(t_tools tools, va_list ap)
 	int						ret;
 
 	ft_bzero(temp, 9216);
-	if (TYPE == 'x' || TYPE == 'X')
-		nbr = va_arg(ap, unsigned int);
+	if (TYPE != 'p')
+		nbr = ull_use_format(tools, ap);
 	else
 		nbr = va_arg(ap, unsigned long long int);
-	if (!nbr)
+	if (!nbr && !PER)
 		HASH = FALSE;
 	if (TYPE == 'o' || TYPE == 'O')
 	{
 		ft_itoabase(nbr, tools, temp, 8);
 		if (ft_atoi(temp) == 0)
-		{
-			ft_putchar('0');
-			return (1);
-		}
+			return ((ft_atoi(temp) == 0 && (PER && !PREC && !HASH)) ?
+				print_buffer(tools) : ft_retchar('0'));
 	}
 	else
 		ft_itoabase(nbr, tools, temp, 16);

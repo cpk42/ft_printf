@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:44:31 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 17:00:16 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:37:05 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ int				use_tools(t_tools tools, char *arg, int ret)
 	else
 	{
 		ft_bzero(str, 9216);
-		if (TYPE == 'c' || TYPE == 'C')
-			PREC = 0;
-		if (PREC && ZERO)
-			ZERO = FALSE;
-		if (!WIDTH && !PREC)
-			WIDTH = ft_strlen(arg);
-		if (PREC > (int)ft_strlen(arg) && TYPE == 's')
-			PREC = ft_strlen(arg);
-		if (!PREC)
-			PREC = ft_strlen(arg);
+		ZERO = (MINUS) ? FALSE : ZERO;
+		PREC = (TYPE == 'c' || TYPE == 'C') ? 0 : PREC;
+		SPACE = (ft_findchar(TYPE, "uUxXoO") || PLUS) ? FALSE : SPACE;
+		PLUS = (ft_findchar(TYPE, "uUxXoO")) ? FALSE : PLUS;
+		ZERO = (PREC && ZERO) ? FALSE : ZERO;
+		WIDTH = (!WIDTH && !PREC) ? ft_strlen(arg) : WIDTH;
+		PREC = (PREC > (int)ft_strlen(arg) && TYPE == 's') ? ft_strlen(arg)
+			: PREC;
+		PREC = (!PREC) ? ft_strlen(arg) : PREC;
 		arg = precision(tools, arg, 0);
 		width(str, tools, arg);
+		if ((HASH || TYPE == 'p') && (TYPE != 'o' && TYPE != 'O'))
+			ft_alignptr(str, tools);
 		ft_putstr(str);
 		ret += ft_strlen(str);
 		ft_strdel(&arg);
