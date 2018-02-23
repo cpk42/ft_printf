@@ -52,6 +52,10 @@ int        main(void)
 	ft_printf("%p\n\n", "string");
 	printf("%p\n", "s");
 	ft_printf("%p\n\n", "s");
+	printf("%lx\n", 140720314867711);
+	ft_printf("%lx\n\n", 140720314867711);
+	printf("%lx\n", 140720314867696);
+	ft_printf("%lx\n\n", 140720314867696);
 //	while (1)
 //		 ;
 //	ft_strdel(&ptr);

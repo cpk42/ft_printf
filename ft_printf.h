@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 16:19:26 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 15:15:11 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:11:15 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,8 @@ t_tools			assign_flags(t_tools tools, char *format, int *i);
 */
 
 char			*ft_ulltoa(__uint64_t nbr);
-char			*ft_itoabase(unsigned int nbr, t_tools tools,
+char			*ft_itoabase(unsigned long long int nbr, t_tools tools,
 						char *str, int base);
 char			*ft_unitoa(wint_t wstr);
-char			*ft_itoh(unsigned int nbr, t_tools, char *str);
 
 #endif

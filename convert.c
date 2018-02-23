@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 15:14:03 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:11:08 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ int	convert_ptr(t_tools tools, va_list ap)
 			return (1);
 		}
 	}
-	else if (TYPE == 'p')
-		ft_itoh(nbr, tools, temp);
 	else
 		ft_itoabase(nbr, tools, temp, 16);
 	ret = use_tools(tools, temp, 0);
