@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:19:45 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/21 17:08:56 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:16:38 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** used to print a space buffer if only a period is provided for precision
 */
 
-int	print_buffer(t_tools tools, va_list ap)
+int		print_buffer(t_tools tools, va_list ap)
 {
 	int ret;
 
