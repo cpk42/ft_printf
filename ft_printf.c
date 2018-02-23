@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:48:08 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:45:42 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 17:03:43 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		find_flag(t_tools tools, va_list ap)
 {
 	int ret;
 
-	if (PER && !PREC)
+	if (PER && !PREC && TYPE != '%')
 		return (print_buffer(tools, ap));
 	else if ((TYPE == 'S') || (TYPE == 'C' && WIDE) ||
 			(TYPE == 's' && FORM == 3) || (TYPE == 'c' && FORM == 3))

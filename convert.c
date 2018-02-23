@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:45:22 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 18:09:45 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,12 @@ int	convert_ptr(t_tools tools, va_list ap)
 	int						ret;
 
 	ft_bzero(temp, 9216);
-	nbr = va_arg(ap, unsigned long long int);
+	if (TYPE == 'x' || TYPE == 'X')
+		nbr = va_arg(ap, unsigned int);
+	else
+		nbr = va_arg(ap, unsigned long long int);
+	if (!nbr)
+		HASH = FALSE;
 	if (TYPE == 'o' || TYPE == 'O')
 	{
 		ft_itoabase(nbr, tools, temp, 8);
