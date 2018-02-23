@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 16:11:08 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:45:22 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,19 +129,19 @@ int	convert_ull(t_tools tools, va_list ap)
 
 int	convert_wchar(t_tools tools, va_list ap, int ret)
 {
-	char	*str;
+	char	str[9216];
 	char	*temp;
 	wchar_t	*w_str;
 	wint_t	c;
 
+	ft_bzero(str, 9216);
 	if (TYPE == 'S' || TYPE == 's')
 	{
 		w_str = (wchar_t *)va_arg(ap, wchar_t *);
-		str = ft_unitoa(*w_str++);
 		while (*w_str)
 		{
-			temp = str;
-			str = ft_strjoin(str, ft_unitoa(*w_str++));
+			temp = ft_unitoa(*w_str++);
+			ft_strcat(str, temp);
 			ft_strdel(&temp);
 		}
 		ret = use_tools(tools, str, 0);
@@ -149,8 +149,9 @@ int	convert_wchar(t_tools tools, va_list ap, int ret)
 	else if (TYPE == 'c' || TYPE == 'C')
 	{
 		c = va_arg(ap, wint_t);
-		str = ft_unitoa(c);
-		ret = use_tools(tools, str, 0);
+		temp = ft_unitoa(c);
+		ret = use_tools(tools, temp, 0);
+		ft_strdel(&temp);
 	}
 	return (ret);
 }
