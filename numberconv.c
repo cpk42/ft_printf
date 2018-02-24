@@ -83,6 +83,8 @@ char	*ft_unitoa(wint_t wstr)
 	else if (wstr <= 0x7FF)
 	{
 		str[0] = (((wstr >> 6) & 0x1F) | 0xC0);
+		ft_putnbr(str[0]);
+		ft_putchar(str[0]);
 		str[1] = (((wstr >> 0) & 0x3F) | 0x80);
 	}
 	else if (wstr <= 0xFFFF)
