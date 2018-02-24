@@ -12,7 +12,7 @@
 
 SRCS = tools.c ft_printf.c convert.c flags.c numberconv.c helper.c buffer.c
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
