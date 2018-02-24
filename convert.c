@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 15:25:38 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/23 15:54:55 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 17:00:11 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	convert_char(t_tools tools, va_list ap)
 		if (mem)
 			ft_strcpy(temp, mem);
 		else
+		{
 			ft_strcpy(temp, "(null)");
+			PLUS = FALSE;
+			SPACE = FALSE;
+		}
 	}
 	else if (TYPE == 'c' || TYPE == 'C')
 		temp[0] = va_arg(ap, int);
