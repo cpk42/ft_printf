@@ -6,7 +6,7 @@
 /*   By: ckrommen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 20:09:50 by ckrommen          #+#    #+#             */
-/*   Updated: 2018/02/22 21:19:19 by ckrommen         ###   ########.fr       */
+/*   Updated: 2018/02/23 20:13:05 by ckrommen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ char	*ft_unitoa(wint_t wstr)
 	else if (wstr <= 0x7FF)
 	{
 		str[0] = (((wstr >> 6) & 0x1F) | 0xC0);
-		ft_putnbr(str[0]);
-		ft_putchar(str[0]);
 		str[1] = (((wstr >> 0) & 0x3F) | 0x80);
 	}
 	else if (wstr <= 0xFFFF)
