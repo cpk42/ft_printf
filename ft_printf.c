@@ -96,12 +96,13 @@ int		parse_flag(char *format, t_tools tools, int *i, va_list ap)
 			WIDE = TRUE;
 		else if (ft_isdigit(format[*i]))
 			WIDTH = ft_atoi(ft_substr(*i, format));
-		else if (format[*i] == '.')
+		else if (format[*i] == '.' && (PER = TRUE))
 		{
 			if ((format[*i + 1] && ft_isdigit(format[*i + 1])))
 				PREC = ft_atoi(ft_substr(*i + 1, format));
-			PER = TRUE;
 		}
+		else if (format[*i] == '*')
+			va_arg(ap, int);
 		else if (FORMAT(format[*i]))
 			tools = assign_format(tools, format, i);
 		else if (format[*i] == '%')
